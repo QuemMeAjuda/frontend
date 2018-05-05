@@ -1,0 +1,36 @@
+
+<mat-card>
+  <mat-card-content layout="row" layout-align="center">
+    <div layout="column" flex style="padding: 10px" class="margin">
+        <img src="" style="margin-bottom: 20px; width: 75%; padding-left: 10%"/>
+        <form>
+          <div class="mat-block" style="margin: 0;">
+            <label>Email</label>
+            <input type="email" name="email" required="true" aria-label="Email">
+          </div>
+          <div class="mat-block" style="margin: 0;">
+            <label>Senha</label>
+            <input type="password" name="password" required="true"  minlength="6" aria-label="Senha">
+          </div>
+          <div layout="row" layout-align="end center" style="margin-bottom: 10px">
+            <button mat-button flex-xs="60" class="mat-primary" (click)="null"
+              hide-gt-xs style="font-size: 11px; margin-left: 0;">
+              Esqueci minha senha
+            </button>
+            <button mat-button flex-xs type="submit" style="margin: 0">Acessar</button>
+          </div>
+        </form>
+        <button mat-button class="login-button" (click)="loginCtrl.login()"
+          style="background-color: #db4437; margin: 10px 0 10px 0;">
+          <mat-icon></mat-icon>
+          <span>ACESSE COM GOOGLE</span>
+        </button>
+      <mat-divider></mat-divider>
+    </div>
+  </mat-card-content>
+  <div style="padding: 15px; font-size: 14px;" hide-xs>
+    <a href="" style="text-decoration: none;">
+      <b >Esqueceu a senha?</b>
+    </a>
+  </div>
+</mat-card>
