@@ -6,14 +6,14 @@
         <form>
           <div class="mat-block" style="margin: 0;">
             <label>Email</label>
-            <input type="email" name="email" required="true" aria-label="Email">
+            <input type="email" name="email" required="true" aria-label="Email" [(ngModel)]="teste2">
           </div>
           <div class="mat-block" style="margin: 0;">
             <label>Senha</label>
             <input type="password" name="password" required="true"  minlength="6" aria-label="Senha">
           </div>
           <div layout="row" layout-align="end center" style="margin-bottom: 10px">
-            <button mat-button flex-xs="60" class="mat-primary" (click)="null"
+            <button mat-button flex-xs="60" class="mat-primary" (click)="signInWithGoogle()"
               hide-gt-xs style="font-size: 11px; margin-left: 0;">
               Esqueci minha senha
             </button>
@@ -33,4 +33,5 @@
       <b >Esqueceu a senha?</b>
     </a>
   </div>
+  {{teste2}}
 </mat-card>
