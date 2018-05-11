@@ -1,6 +1,15 @@
 
 <mat-card>
   <mat-card-content layout="row" layout-align="center">
+      <div layout="column" layout-wrap class="example-container">
+          <mat-form-field>
+            <input matInput placeholder="Input">
+          </mat-form-field>
+        
+          <mat-form-field>
+            <input matInput placeholder="Textarea">
+          </mat-form-field>
+        </div>
     <div layout="column" flex style="padding: 10px" class="margin">
         <img src="" style="margin-bottom: 20px; width: 75%; padding-left: 10%"/>
         <form>
@@ -13,14 +22,14 @@
             <input type="password" name="password" required="true"  minlength="6" aria-label="Senha">
           </div>
           <div layout="row" layout-align="end center" style="margin-bottom: 10px">
-            <button mat-button flex-xs="60" class="mat-primary" (click)="signInWithGoogle()"
+            <button mat-button flex-xs="60" class="mat-primary" (click)="null"
               hide-gt-xs style="font-size: 11px; margin-left: 0;">
               Esqueci minha senha
             </button>
             <button mat-button flex-xs type="submit" style="margin: 0">Acessar</button>
           </div>
         </form>
-        <button mat-button class="login-button" (click)="loginCtrl.login()"
+        <button mat-button class="login-button" (click)="login()"
           style="background-color: #db4437; margin: 10px 0 10px 0;">
           <mat-icon></mat-icon>
           <span>ACESSE COM GOOGLE</span>

@@ -9,7 +9,7 @@ export const environment = {
     authDomain: "e-quemmeajuda.firebaseapp.com",
     databaseURL: "https://e-quemmeajuda.firebaseio.com",
     projectId: "e-quemmeajuda",
-    storageBucket: "",
+    storageBucket: "e-quemmeajuda.appspot.com",
     messagingSenderId: "33626081602"
   }
 };

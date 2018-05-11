@@ -1,37 +1,44 @@
 import { Injectable } from '@angular/core';
-import { Router } from "@angular/router";
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
+import { Observable} from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
-import { Observable } from 'rxjs';
+import { User } from './user';
+import { switchMap } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
-
-    private user: Observable<firebase.User>;
-    private userDetails: firebase.User = null;
-
-    constructor(private _firebaseAuth: AngularFireAuth, private router: Router) { 
-        this.user = _firebaseAuth.authState;
-    }
-
-    signInWithGoogle() {
-      return this._firebaseAuth.auth.signInWithPopup(
-        new firebase.auth.GoogleAuthProvider()
-      )
-    }
-
-    isLoggedIn() {
-      if (this.userDetails == null ) {
-          return false;
-        } else {
-          return true;
-        }
+  user$: Observable<User>;
+  constructor(public afAuth: AngularFireAuth,
+              public afs: AngularFirestore) {
+    this.user$ = afAuth.authState.switchMap(user => {
+      if(user) {
+        return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+      } else {
+        return Observable.of(null);
       }
-    logout() {
-        this._firebaseAuth.auth.signOut()
-        .then((res) => this.router.navigate(['/']));
-      }
+    })
+  }
+  loginWithGoogle(){
+    const provider = new firebase.auth.GoogleAuthProvider();
+    this.afAuth.auth.signInWithPopup(provider).then((credential) => {
+      this.updateUser(credential.user);
+    })
+  }
+  updateUser(user) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const data: User = {
+      uid: user.uid,
+      email: user.email,
+      name: user.name,
+      photoURL: user.photoURL
+    }
+    return userRef.set(data, {merge: true});
+  }
+  logout(){
+    this.afAuth.auth.signOut();
+  }
 }
 
