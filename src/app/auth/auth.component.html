@@ -1,43 +1,68 @@
 
-<div class="main-div" style="background: #396d8b">
-  <mat-card style="background: #8cc6e7">
-    <mat-card-content layout="row" layout-align="center center">
-      <div layout="column" flex style="padding: 10px" class="margin">
-          <img src="" style="margin-bottom: 20px; width: 75%; padding-left: 10%"/>
-          <form class="example-form">
-            <div class="mat-block">
-              <mat-form-field class="example-full-width">
-                <input matInput type="email" name="email" required="true" aria-label="Email" placeholder="email">
-              </mat-form-field>
-            </div>
-            <div class="mat-block">
-              <mat-form-field class="example-full-width">
-                <input matInput type="password" name="password" required="true"  minlength="6" aria-label="Senha" placeholder="senha">
-              </mat-form-field>
-            </div>
-            <div layout="row" class="center" style="margin-top: -10px;">
-              <button mat-button color="primary" flex-xs="60" class="mat-primary" (click)="logout()"
-                hide-gt-xs style="font-size: 11px; margin-left: 0;">
-                Criar conta
-              </button>
-              <button mat-button flex-xs="60" class="mat-primary" type="submit"
-                hide-gt-xs style="font-size: 11px; margin-left: 0;">
-                Acessar
-              </button>
-            </div>
-          </form>
-          <button mat-raised-button (click)="login()"
-            style="background-color: #db4437; margin: 10px 0 10px 0;">
-            <mat-icon style="margin-left: -2px;">email</mat-icon>
-            <span>        ACESSE COM GOOGLE</span>
-          </button>
-        <mat-divider></mat-divider>
-      </div>
-      <div class="center" hide-xs>
-          <a href="" style="text-decoration: none;">
-            <b >Esqueceu a senha?</b>
-          </a>
+<div layout="row" class="main-div" style="background: #396d8b">
+  <div class="center">
+    <img style="-webkit-filter: drop-shadow(3px 3px 3px white); filter: drop-shadow(3px 3px 3px white); width: 60%;
+    height: auto;" [src]="logo"/>
+  </div>
+  <div class="center" style="margin-top: 5px;">
+      <mat-icon style="color: white">help_outline</mat-icon>
+      <b style="margin-top: -2px; margin-left: 5px; color: white;">Faça perguntas</b>&#160;&#160;&#160;&#160;&#160;
+  </div>
+  <div style="margin-top: 5px;" class="center">
+      <mat-icon style="color: white">people_outline</mat-icon>
+      <b style="margin-top: -2px; margin-left: 5px; color: white;">Encontre tutores</b>&#160;&#160;&#160;
+  </div>
+  <div style="margin-top: 5px;" class="center">
+      <mat-icon style="color: white">forum</mat-icon>
+      <b style="margin-top: -2px; margin-left: 5px; color: white;">Discuta soluções</b>&#160;&#160;&#160;
+  </div>
+  <div style="margin-top: 5px;" class="center">
+      <mat-icon style="color: white">thumb_up_alt</mat-icon>
+      <b style="margin-top: -2px; margin-left: 5px; color: white;">Avalie os tutores</b>&#160;&#160;&#160;
+  </div>
+  <div style="margin-top: 5px;" class="center">
+      <mat-icon style="color: white">group_add</mat-icon>
+      <b style="margin-top: -2px; margin-left: 5px; color: white;">Torne-se um tutor</b>
+  </div>
+  <div class="center" style="margin-top: 25px;">
+    <mat-card style="background: #4b8eb4;">
+      <mat-card-content layout="column">
+        <div layout="column" flex style="padding: 10px" class="margin">
+            <form class="example-form">
+              <div class="mat-block">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="email" name="email" required="true" aria-label="Email" placeholder="email">
+                </mat-form-field>
+              </div>
+              <div class="mat-block">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="password" name="password" required="true"  minlength="6" aria-label="Senha" placeholder="senha">
+                </mat-form-field>
+              </div>
+              <div layout="row" class="center" style="margin-top: -10px;">
+                <button mat-button flex-xs="60" class="mat-primary" (click)="logout()"
+                  hide-gt-xs style="font-size: 11px; margin-left: 0; color:#db4437">
+                  Criar conta
+                </button>
+                <button mat-button flex-xs="60" type="submit" class="mat-primary"
+                  hide-gt-xs style="font-size: 11px; margin-left: 0; color:#db4437">
+                  Acessar
+                </button>
+              </div>
+            </form>
+            <button mat-raised-button (click)="login()"
+              style="background-color: #db4437; margin: 10px 0 10px 0;">
+              <mat-icon style="margin-left: -2px;">email</mat-icon>
+              <span>        ACESSE COM GOOGLE</span>
+            </button>
+          <mat-divider></mat-divider>
         </div>
-    </mat-card-content>
-  </mat-card>
+        <div class="center" hide-xs>
+            <a href="" style="text-decoration: none; color:#db4437;">
+              <b >Esqueceu a senha?</b>
+            </a>
+          </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

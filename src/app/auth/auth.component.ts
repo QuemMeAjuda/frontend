@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 })
 export class AuthComponent implements OnInit {
   user: User;
+
+  public logo = "assets/images/quem_me_ajuda_logo.png";
+
   constructor(public AuthService: AuthService, private router: Router) { }
 
   ngOnInit() {
