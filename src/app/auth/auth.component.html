@@ -1,0 +1,43 @@
+
+<div class="main-div" style="background: #396d8b">
+  <mat-card style="background: #8cc6e7">
+    <mat-card-content layout="row" layout-align="center center">
+      <div layout="column" flex style="padding: 10px" class="margin">
+          <img src="" style="margin-bottom: 20px; width: 75%; padding-left: 10%"/>
+          <form class="example-form">
+            <div class="mat-block">
+              <mat-form-field class="example-full-width">
+                <input matInput type="email" name="email" required="true" aria-label="Email" placeholder="email">
+              </mat-form-field>
+            </div>
+            <div class="mat-block">
+              <mat-form-field class="example-full-width">
+                <input matInput type="password" name="password" required="true"  minlength="6" aria-label="Senha" placeholder="senha">
+              </mat-form-field>
+            </div>
+            <div layout="row" class="center" style="margin-top: -10px;">
+              <button mat-button color="primary" flex-xs="60" class="mat-primary" (click)="logout()"
+                hide-gt-xs style="font-size: 11px; margin-left: 0;">
+                Criar conta
+              </button>
+              <button mat-button flex-xs="60" class="mat-primary" type="submit"
+                hide-gt-xs style="font-size: 11px; margin-left: 0;">
+                Acessar
+              </button>
+            </div>
+          </form>
+          <button mat-raised-button (click)="login()"
+            style="background-color: #db4437; margin: 10px 0 10px 0;">
+            <mat-icon style="margin-left: -2px;">email</mat-icon>
+            <span>        ACESSE COM GOOGLE</span>
+          </button>
+        <mat-divider></mat-divider>
+      </div>
+      <div class="center" hide-xs>
+          <a href="" style="text-decoration: none;">
+            <b >Esqueceu a senha?</b>
+          </a>
+        </div>
+    </mat-card-content>
+  </mat-card>
+</div>
