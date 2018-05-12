@@ -7,38 +7,59 @@ import { Observable} from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
 import { User } from './user';
 import { switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router'
 
 @Injectable()
 export class AuthService {
   user$: Observable<User>;
-  constructor(public afAuth: AngularFireAuth,
-              public afs: AngularFirestore) {
-    this.user$ = afAuth.authState.switchMap(user => {
-      if(user) {
-        return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
-      } else {
-        return Observable.of(null);
-      }
-    })
-  }
-  loginWithGoogle(){
+  constructor(private router: Router) {}
+
+  public token_id: string;
+
+  public loginWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
-    this.afAuth.auth.signInWithPopup(provider).then((credential) => {
-      this.updateUser(credential.user);
+    firebase.auth().signInWithPopup(provider).then((credential) => {
+      firebase.auth().currentUser.getIdToken().then(
+        (idToken: string) => {
+            this.token_id = idToken;
+            localStorage.setItem('idToken', idToken);
+            this.router.navigate(['/']);
+
+        }
+    )
     })
   }
+
+  public isAuth(): boolean {
+
+    if(this.token_id === undefined && localStorage.getItem('idToken') !== null) {
+        this.token_id = localStorage.getItem('idToken');
+    }
+
+    if(this.token_id === undefined && localStorage.getItem('idToken') === null) {
+        this.router.navigate(['/signin']);
+    }
+
+    return this.token_id !== undefined;
+  }
+
   updateUser(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
     const data: User = {
       uid: user.uid,
       email: user.email,
       name: user.name,
       photoURL: user.photoURL
     }
-    return userRef.set(data, {merge: true});
   }
+
   logout(){
-    this.afAuth.auth.signOut();
+    firebase.auth().signOut().then(
+      (resposta: any) => {
+          localStorage.removeItem('idToken');
+          this.token_id = undefined;
+          this.router.navigate(['/signin']);
+      }
+  )
   }
 }
 

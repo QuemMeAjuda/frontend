@@ -4,11 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app.routing.module';
 import { AppComponent } from './app.component';
 
-// Angular Material Imports
-import { MatButtonModule, MatCheckboxModule, MatCardModule, MatFormFieldModule, MatInputModule } from '@angular/material';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import { FormsModule } from '@angular/forms';
+import { DesignModule } from './design.module';
 
 import { environment } from '../environments/environment';
 // Firebase imports
@@ -20,34 +16,29 @@ import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore
 import { HttpModule } from '@angular/http';
 
 import { AuthComponent } from './auth/auth.component';
+import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent
+    AuthComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    NoopAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
-    MatButtonModule,
-    MatCheckboxModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    MatIconModule,
-    MatDividerModule,
-    MatFormFieldModule,
-    MatInputModule,
+    NoopAnimationsModule,
+    DesignModule,
+    AppRoutingModule,
     AppRoutingModule,
     HttpModule,
-    AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

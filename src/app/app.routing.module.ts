@@ -5,11 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 import { AuthComponent } from './auth/auth.component';
-import { AppComponent } from './app.component';
-
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const appRoutes: Routes = [
-    { path: '', component: AppComponent },
+    { path: '', component: HomeComponent, canActivate:[ AuthGuard ] },
     { path: 'signin', component: AuthComponent }
 
 ];

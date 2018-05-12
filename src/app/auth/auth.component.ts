@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './user';
 import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -9,12 +10,18 @@ import { AuthService } from './auth.service';
 })
 export class AuthComponent implements OnInit {
   user: User;
-  constructor(public AuthService: AuthService) { }
+  constructor(public AuthService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.AuthService.user$.subscribe(user => this.user = user);
+    if(this.AuthService.isAuth()) {
+      this.router.navigate(['/']);
+    }
   }
+
   login(){
     this.AuthService.loginWithGoogle();
+  }
+  logout() {
+    this.AuthService.logout();
   }
 }
