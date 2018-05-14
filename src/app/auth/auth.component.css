@@ -31,10 +31,26 @@
     padding-top: 20px;
 }
 
+.split-small-screen {
+    height: 50%;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.upside-small {
+    height: 20% !important;
+}
 .centered {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+.small-font {
+    font-size: 14px;
 }

@@ -2,26 +2,26 @@
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
 </head>
 <div layout="column" style="background: #1b2531; height: 100vh;">
-  <div class="split" style="left: 0;">
+  <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'" style="left: 0;">
     <div class="centered">
-      <img style="width: 850px;
-      height: auto;" [src]="logo"/>
+      <img style="width: 100%;
+      height: auto; margin-right: 50px;" [src]="logo"/>
       <p style="font-family: 'IBM Plex Sans Condensed', sans-serif;;
-      font-size: 35px; color: white; margin-top: -10px; margin-left: 50px;">
+      font-size: 100%; color: white; margin-top: -10px;">
         Tire suas dúvidas, encontre e avalie tutores, discuta soluções
         e também torne-se um tutor!
       </p>
     </div>
   </div>
-  <div class="split" style="margin-top: 25px; right: 0;">
+  <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen'" style="margin-top: 25px; right: 0;">
     <div class="centered">
     <mat-card style="background:white;">
       <mat-card-title>
-        Acesse agora com sua conta
+        <p [ngClass]="isVerySmallScreen() ? 'small-font' : ''">Acesse agora com sua conta</p>
       </mat-card-title>
-      <mat-card-content layout="column" style="margin-top: 65px;">
-        <div layout="column" flex style="margin-bottom: 35px;" class="margin">
-            <form class="example-form" style="margin-bottom: 35px;">
+      <mat-card-content layout="column">
+        <div layout="column" flex class="margin">
+            <form class="example-form">
               <div class="mat-block">
                 <mat-form-field class="example-full-width">
                   <input matInput type="email" name="email" required="true" aria-label="Email" placeholder="email">
@@ -47,18 +47,18 @@
               </button>
             </div>
         </div>
-        <mat-divider></mat-divider>
-        <div layout="row" class="center" >
-          <button mat-button flex-xs="60" class="mat-primary" (click)="null"
-            hide-gt-xs style="font-size: 11px; margin-left: 0; color:#d51936">
-            Criar conta
-          </button>
-          <button mat-button flex-xs="60" type="submit" class="mat-primary"
-            hide-gt-xs style="font-size: 11px; margin-left: 0; color:#d51936">
-            Esqueceu a senha?
-          </button>
-        </div>
+        <mat-divider *ngIf="!isVerySmallScreen()" style="margin-top: 10px;"></mat-divider>
       </mat-card-content>
+      <mat-card-actions layout="row" class="center" >
+        <button mat-button flex-xs="60" class="mat-primary" (click)="null"
+          hide-gt-xs style="font-size: 11px; margin-left: 0; color:#d51936">
+          Criar conta
+        </button>
+        <button mat-button flex-xs="60" class="mat-primary" (click)="null"
+          hide-gt-xs style="font-size: 11px; margin-left: 0; color:#d51936">
+          Esqueceu a senha?
+        </button>
+      </mat-card-actions>
     </mat-card>
   </div>
   </div>

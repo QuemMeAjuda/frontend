@@ -21,10 +21,16 @@ export class AuthComponent implements OnInit {
     }
   }
 
-  login(){
+  login(): void {
     this.AuthService.loginWithGoogle();
   }
-  logout() {
+  logout(): void {
     this.AuthService.logout();
+  }
+  isLargerScreen(): boolean {
+    return window.screen.width >= 960;
+  }
+  isVerySmallScreen(): boolean {
+    return window.screen.width <= 420;
   }
 }
