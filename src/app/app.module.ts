@@ -20,12 +20,14 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
+    TutorRegisterComponent
   ],
   imports: [
     BrowserModule,

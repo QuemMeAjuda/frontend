@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title style="text-align: center">Cadastro como Tutor</mat-card-title>
+  <mat-card-subtitle style="text-align: center">
+    <p>Você está prestes a se tornar um tutor!</p>
+    <p>Informe abaixo as competências nas quais você deseja atuar.</p>
+  </mat-card-subtitle>
+  <mat-card-content>
+    <form class="exemple-form">
+      <div style="text-align: center">
+        <mat-form-field style="width: 75%">
+          <textarea matInput placeholder="Competências" [(ngModel)]="skills" name="skills">
+            Competências
+          </textarea>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button (click)="becameTutor()">
+      Tornar-se Tutor
+    </button>
+  </mat-card-actions>
+</mat-card>
