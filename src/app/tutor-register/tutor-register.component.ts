@@ -30,6 +30,12 @@ export class TutorRegisterComponent implements OnInit {
     return this.out;
   }
 
+  isLargerScreen(): boolean {
+    return window.screen.width >= 960;
+  }
+  isVerySmallScreen(): boolean {
+    return window.screen.width <= 420;
+  }
 
 
 }
