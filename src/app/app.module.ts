@@ -20,12 +20,15 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { SignupComponent } from './signup/signup.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,8 @@ import { HomeComponent } from './home/home.component';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]

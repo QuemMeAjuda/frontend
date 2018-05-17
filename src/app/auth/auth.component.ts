@@ -33,4 +33,8 @@ export class AuthComponent implements OnInit {
   isVerySmallScreen(): boolean {
     return window.screen.width <= 420;
   }
+
+  public signup(){
+    this.router.navigate(['signup'])
+  }
 }

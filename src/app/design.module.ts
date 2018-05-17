@@ -1,7 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MatButtonModule, MatCheckboxModule, MatCardModule, MatFormFieldModule, MatInputModule, MatToolbarModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatToolbarModule,
+  MatStepperModule
+} from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { FormsModule } from '@angular/forms';
@@ -19,7 +27,8 @@ import { DomSanitizer } from "@angular/platform-browser";
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatStepperModule
   ],
   exports: [
     FormsModule,
@@ -30,7 +39,8 @@ import { DomSanitizer } from "@angular/platform-browser";
     MatDividerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatStepperModule
   ],
   declarations: []
 })
