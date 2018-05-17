@@ -2,6 +2,10 @@
 
 export const Utils = {
 
+    isLargerScreen:  function isLargerScreen(){
+        return window.screen.width >= 960;
+    },
+
     addHttpsToUrl :  function addHttpsToUrl(text, urls) {
         if(urls) {
             var http = "http://";

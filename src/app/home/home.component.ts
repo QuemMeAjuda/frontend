@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 
 @Component({
@@ -9,6 +9,8 @@ import { AuthService } from '../auth/auth.service';
 export class HomeComponent implements OnInit {
 
   constructor(private auth: AuthService) { }
+
+  @ViewChild('ask-help') public publicacoes: any
 
   ngOnInit() {
   }
