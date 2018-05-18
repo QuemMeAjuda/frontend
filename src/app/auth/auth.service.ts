@@ -5,8 +5,6 @@ import { User } from './user';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router'
 
-export var userInf;
-
 @Injectable()
 export class AuthService {
 
