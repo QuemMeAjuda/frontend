@@ -23,8 +23,6 @@ export class AuthService {
     }
   }
 
-
-
   public loginWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then((credential) => {
