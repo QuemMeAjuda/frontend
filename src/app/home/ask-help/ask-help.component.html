@@ -3,19 +3,19 @@
   <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen'" class="centered">
     <div class="ask_help-container" style="background: white;border-radius: 15px">
         <mat-form-field hintLabel="Máximo 144 carácters">
-          <input matInput #input maxlength="144" placeholder="Descrição geral da dúvida">
+          <input matInput #input [(ngModel)]="shortDesc" maxlength="144" placeholder="Descrição geral da dúvida">
           <mat-hint align="end">{{input.value?.length || 0}}/144</mat-hint>
         </mat-form-field>
         
         <mat-form-field style="margin-top: 3px;">
-          <textarea matInput placeholder="Descrição detalhada da dúvida"></textarea>
+          <textarea matInput [(ngModel)]="longDesc" placeholder="Descrição detalhada da dúvida"></textarea>
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput placeholder="Tags Ex.: 'While, For'">
+          <input matInput [(ngModel)]="tags" placeholder="Tags Ex.: 'While, For'">
         </mat-form-field>
 
-        <button mat-button style="width:50%; margin: auto" (click)="fazAlgo()">Enviar Pedido</button>
+        <button mat-button style="width:50%; margin: auto" (click)="fazAlgo(shortDesc,longDesc,tags)">Enviar Pedido</button>
     </div>
   </div>
 
