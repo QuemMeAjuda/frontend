@@ -1,0 +1,27 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
+</head>
+<div layout="column">
+  <div style="margin-top: 25px; right: 0;">
+    <div class="center">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image"></div>
+          <mat-card-title>Título: {{help.title}}</mat-card-title>
+          <mat-card-subtitle>Autor: {{help.author.name}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            Descrição:
+          </p>
+          <p>
+            {{help.description}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>Comentar</button>
+        </mat-card-actions>
+      </mat-card>
+  </div>
+  </div>
+</div>
