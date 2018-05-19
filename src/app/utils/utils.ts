@@ -1,7 +1,7 @@
 "use strict";
 
 export const Utils = {
-
+    urlBase : 'http://localhost:3000',
     addHttpsToUrl :  function addHttpsToUrl(text, urls) {
         if(urls) {
             var http = "http://";

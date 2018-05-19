@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-tutor-register',
@@ -10,9 +11,12 @@ export class TutorRegisterComponent implements OnInit {
   protected skills: any;
   private out: Array<string> = [];
 
-  constructor() { }
+  constructor(private userService : UserService) { }
 
   ngOnInit() {
+   this.userService.getAjudas(45).subscribe(
+     users => console.log(users),
+     error => console.log(error.error.message))
   }
 
   public becameTutor() {

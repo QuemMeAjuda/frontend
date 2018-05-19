@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from '@angular/http';
 
+import {UserService} from "./service/user.service";
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -27,7 +28,7 @@ import { TutorRegisterComponent } from './tutor-register/tutor-register.componen
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    
+
     NoopAnimationsModule,
     DesignModule,
     AppRoutingModule,
@@ -36,7 +37,7 @@ import { TutorRegisterComponent } from './tutor-register/tutor-register.componen
     HttpModule,
   ],
   entryComponents: [HomeComponent],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard,UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
