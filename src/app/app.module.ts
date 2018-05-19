@@ -16,13 +16,15 @@ import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
+import { HelpDetailsComponent } from './help-details/help-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
-    TutorRegisterComponent
+    TutorRegisterComponent,
+    HelpDetailsComponent
   ],
   imports: [
     BrowserModule,
