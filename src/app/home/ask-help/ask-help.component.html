@@ -1,7 +1,7 @@
-<div layout="column" style="background: #1b2531; height: 100vh;">
+<div layout="column" style="margin-top: 30px;">
 
   <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen'" class="centered">
-    <div class="ask_help-container" style="background: white;border-radius: 15px">
+    <div class="ask_help-container" style="background: white;">
         <mat-form-field hintLabel="Máximo 144 carácters">
           <input matInput #input [(ngModel)]="shortDesc" maxlength="144" placeholder="Descrição geral da dúvida">
           <mat-hint align="end">{{input.value?.length || 0}}/144</mat-hint>

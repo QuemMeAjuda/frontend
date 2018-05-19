@@ -8,18 +8,26 @@ import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { AuthGuard } from './auth/auth.guard';
+import { HelpDetailsComponent } from './help-details/help-details.component';
 
 const appRoutes: Routes = [
-    { path: '', component: HomeComponent, canActivate:[ AuthGuard ] },
+    { path: '', redirectTo: '/', pathMatch: 'full' },
     { path: 'signin', component: AuthComponent },
-    { path: 'ask_for_help', component: AskHelpComponent, canActivate:[ AuthGuard ] }
-
 ];
+
+const childRoutes: Routes = [
+    { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [
+        { path: 'help_details/:id', component: HelpDetailsComponent },
+        { path: 'ask_for_help', component: AskHelpComponent }
+    ] },
+    { path: '**', redirectTo: '/'}
+]
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(appRoutes)
-    ],
+        RouterModule.forRoot(appRoutes),
+        RouterModule.forChild(childRoutes)
+        ],
     exports: [RouterModule]
 })
 export class AppRoutingModule {}

@@ -25,6 +25,9 @@
                 <button mat-button style="width: 100%;" (click)="null">Perfil</button>
             </div>
             <div>
+                <button mat-button style="width: 100%;" (click)="goToAskHelp()">Pedir ajuda</button>
+            </div>
+            <div>
                 <button mat-button style="width: 100%;" (click)="null">Meus pedidos de ajuda</button>
             </div>
             <div>
@@ -36,8 +39,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content style="background-color: rgba(241, 241, 241, 0.808);">
-        <p style="margin-left: 25px;" *ngFor="let content of fillerContent">{{content}}</p>
-
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

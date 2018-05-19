@@ -17,6 +17,8 @@ import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
+import { HelpDetailsComponent } from './help-details/help-details.component';
+import { HelpService } from './help-details/help.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { TutorRegisterComponent } from './tutor-register/tutor-register.componen
     AuthComponent,
     HomeComponent,
     AskHelpComponent,
-    TutorRegisterComponent
+    TutorRegisterComponent,
+    HelpDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,7 @@ import { TutorRegisterComponent } from './tutor-register/tutor-register.componen
     HttpModule,
   ],
   entryComponents: [HomeComponent],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService, AuthGuard, HelpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
