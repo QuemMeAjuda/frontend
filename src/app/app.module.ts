@@ -16,6 +16,7 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
 import { HelpDetailsComponent } from './help-details/help-details.component';
 import { HelpService } from './help-details/help.service';
@@ -25,6 +26,7 @@ import { HelpService } from './help-details/help.service';
     AppComponent,
     AuthComponent,
     HomeComponent,
+    AskHelpComponent,
     TutorRegisterComponent,
     HelpDetailsComponent
   ],

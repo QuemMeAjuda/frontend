@@ -1,5 +1,6 @@
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {ChangeDetectorRef} from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../auth/user';
 import { Router } from '@angular/router';
@@ -13,6 +14,7 @@ import { Router } from '@angular/router';
 export class HomeComponent {
 
   mobileQuery: MediaQueryList;
+  @ViewChild('ask-help') public publicacoes: any
 
   public user: User;
 
@@ -52,6 +54,9 @@ export class HomeComponent {
 
   goToHome() {
     this.router.navigate(['/']);
+  }
+  goToAskHelp() {
+    this.router.navigate(['/ask_for_help']);
   }
   logout(): void {
     this.auth.logout();
