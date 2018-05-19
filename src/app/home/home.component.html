@@ -1,12 +1,43 @@
-<mat-toolbar>
-  <mat-icon>home</mat-icon>
-  <h3 class="center">
-    QuemMeAjuda
-  </h3>
-  <button style="margin-left: auto;" title="Sair" mat-button (click)="logout()">
-    sair
-    <mat-icon>power_settings_new</mat-icon>
-  </button>
-</mat-toolbar>
-<div class="main-div"></div>
+<div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
+  <mat-toolbar color="primary" class="example-toolbar" style="background: #1b2531;">
+    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+    <img [src]="logo" [ngClass]="getLogoSize()" style="margin-top: 2px;"/>
+  </mat-toolbar>
 
+  <mat-sidenav-container class="example-sidenav-container"
+                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+      <mat-nav-list>
+        <div layout="row" style="width: 15em;">
+          <div>
+            <div class="center" style="margin-top: 1em">
+                <img style="border-radius: 50%; height: 7em;" [src]="user.info.photoURL"/>
+            </div>
+            <div class="center" style="margin-top: 1em">
+                <b>{{user.info.name}}</b>
+            </div>
+            <mat-divider style="margin-top: 2em;"></mat-divider>
+            <div>
+                <button mat-button style="width: 100%;" (click)="goToHome()">Página inicial</button>
+            </div>
+            <div>
+                <button mat-button style="width: 100%;" (click)="null">Perfil</button>
+            </div>
+            <div>
+                <button mat-button style="width: 100%;" (click)="null">Meus pedidos de ajuda</button>
+            </div>
+            <div>
+                <button mat-button style="width: 100%;" (click)="logout()">Sair</button>
+            </div>
+          </div>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content style="background-color: rgba(241, 241, 241, 0.808);">
+        <p style="margin-left: 25px;" *ngFor="let content of fillerContent">{{content}}</p>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
