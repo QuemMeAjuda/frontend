@@ -12,17 +12,20 @@ export class HelpDetailsComponent implements OnInit {
 
   id: any;
   watcher: Subscription;
-  help: any;
+  help:any;
 
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
-      private helpService: HelpService) { }
+      private helpService: HelpService) {
+
+  this.help = {detailedDescription:"",
+    generalDescription: ""}}
 
   ngOnInit() {
     this.watcher = this.routeAct.params.subscribe(
       (params: any) => {
         this.id = params['id'];
-        this.help = this.helpService.getHelp(this.id);
+        this.helpService.getHelp(this.id).subscribe(res=> this.help = res['data']);
       }
     );
   }

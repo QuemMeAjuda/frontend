@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Utils} from "../utils/utils";
 
 @Injectable()
 export class HelpService {
@@ -47,7 +49,7 @@ export class HelpService {
                 comment: 'Hi! I am a Scrum master. I will explain the Scrum in a Classroom'
             }]
         },
-        
+
     }
 
     getHelps(){
@@ -55,10 +57,10 @@ export class HelpService {
         //  think in way to get 10 for paginated timeline
     }
 
-    getHelp(id: any){
-        return this.helps[id] || null;
+    getHelp(id){
+        return this.http.get(Utils.urlBase+`/ajuda/getAjuda/${id}`);
     }
 
-    constructor() { }
+    constructor(private http :HttpClient) { }
 
 }
