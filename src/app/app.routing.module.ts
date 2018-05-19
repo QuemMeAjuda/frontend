@@ -16,8 +16,9 @@ const appRoutes: Routes = [
 
 const childRoutes: Routes = [
     { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [
-        { path: 'helpDetails', component: HelpDetailsComponent }
-    ] }
+        { path: 'helpDetails/:id', component: HelpDetailsComponent }
+    ] },
+    { path: '**', redirectTo: '/'}
 ]
 
 @NgModule({
