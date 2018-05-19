@@ -14,9 +14,7 @@ export class TutorRegisterComponent implements OnInit {
   constructor(private userService : UserService) { }
 
   ngOnInit() {
-   this.userService.getAjudas(45).subscribe(
-     users => console.log(users),
-     error => console.log(error.error.message))
+
   }
 
   public becameTutor() {

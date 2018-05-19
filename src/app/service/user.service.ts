@@ -11,6 +11,6 @@ export class UserService {
   constructor(private http : HttpClient) {}
 
   getAjudas(id): Observable<any> {
-    return this.http.get("http://localhost:3000/user/getAjudasByAluno/5b0094f6d032dd58df67d83a");
+    return this.http.get(`${this.url}/getAjudasByAluno/${id}`);
   }
 }

@@ -13,22 +13,20 @@ import {TutorRegisterComponent} from "./tutor-register/tutor-register.component"
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate:[ AuthGuard ] },
-  { path: 'signin', component: AuthComponent },
-  { path: 'tutorCadastro', component: TutorRegisterComponent},
-  { path: 'helpDetails/:id', component: HelpDetailsComponent }
-];
+  { path: 'signin', component: AuthComponent }];
 
 const childRoutes: Routes = [
     { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [
         { path: 'help_details/:id', component: HelpDetailsComponent },
         { path: 'ask_for_help', component: AskHelpComponent }
-    ]}
-];
+    ] },
+  { path: '**', redirectTo: '/'}
+]
 
 @NgModule({
   imports: [
     RouterModule.forRoot(appRoutes),
-    //RouterModule.forChild(childRoutes)
+    RouterModule.forChild(childRoutes)
   ],
   exports: [RouterModule]
 })
