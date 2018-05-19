@@ -37,8 +37,12 @@
         </div>
       </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content style="background-color: rgba(241, 241, 241, 0.808);  height: 100vh;">
+    <mat-sidenav-content style="background-color: rgba(241, 241, 241, 0.808); display: flex;
+    flex-direction: column;">
         <router-outlet></router-outlet>
+        <div *ngIf="isHomePage()">
+            <app-timeline></app-timeline>
+        </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

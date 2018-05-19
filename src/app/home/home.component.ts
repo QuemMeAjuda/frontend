@@ -51,7 +51,9 @@ export class HomeComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
+  isHomePage(): boolean {
+    return this.router.routerState.snapshot.url === "/";
+  }
   goToHome() {
     this.router.navigate(['/']);
   }
