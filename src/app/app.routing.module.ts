@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
+import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { AuthGuard } from './auth/auth.guard';
 import { HelpDetailsComponent } from './help-details/help-details.component';
 
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
 
 const childRoutes: Routes = [
     { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [
-        { path: 'helpDetails/:id', component: HelpDetailsComponent }
+        { path: 'help_details/:id', component: HelpDetailsComponent },
+        { path: 'ask_for_help', component: AskHelpComponent }
     ] },
     { path: '**', redirectTo: '/'}
 ]

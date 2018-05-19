@@ -1,0 +1,14 @@
+.ask_help-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.ask_help-container > * {
+  width: 100%
+}
+
+.centered {
+    margin: auto;
+    width: 60%;
+}
