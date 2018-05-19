@@ -17,13 +17,16 @@ import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
+import { HelpDetailsComponent } from './help-details/help-details.component';
+import { HelpService } from './help-details/help.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
-    TutorRegisterComponent
+    TutorRegisterComponent,
+    HelpDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { TutorRegisterComponent } from './tutor-register/tutor-register.componen
     HttpModule,
   ],
   entryComponents: [HomeComponent],
-  providers: [AuthService, AuthGuard,UserService],
+  providers: [AuthService, AuthGuard,UserService, HelpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
