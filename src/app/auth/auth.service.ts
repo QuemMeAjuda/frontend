@@ -60,7 +60,14 @@ export class AuthService {
       photoURL: credential.user.photoURL,
       uid: credential.user.uid
     };
-    this.userService.postUser(data).subscribe(res=>res, err=> err);
+    this.userService.getUser(credential.user.uid).subscribe(res=> {
+      if(res['data'].length == 0){
+        console.log("usuario novo");
+        this.userService.postUser(data).subscribe(res=>res, err=> err);
+      }else{
+        console.log("usuario já cadastrado");
+      }
+    }, err => err);
     this.userInfo$ = new User(data);
     localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
   }
