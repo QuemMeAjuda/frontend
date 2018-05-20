@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import { User } from './user';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router'
+import {UserService} from "../service/user.service";
 
 @Injectable()
 export class AuthService {
@@ -14,7 +15,7 @@ export class AuthService {
 
   public userInfo$: User;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private userService : UserService) {
     if (localStorage.getItem('userInfo')) {
       var parse = JSON.parse(localStorage.getItem('userInfo'));
       this.userInfo$ = new User(parse.info);
@@ -59,10 +60,10 @@ export class AuthService {
       photoURL: credential.user.photoURL,
       uid: credential.user.uid
     };
+    this.userService.postUser(data).subscribe(res=>res, err=> err);
     this.userInfo$ = new User(data);
     localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
   }
-
   getCurrentUser() {
     return this.userInfo$;
   }
