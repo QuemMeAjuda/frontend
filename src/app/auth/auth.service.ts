@@ -5,11 +5,10 @@ import { User } from './user';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router'
 import {UserService} from "../service/user.service";
+import * as _ from 'lodash';
 
 @Injectable()
 export class AuthService {
-
-  user$: Observable<any>;
 
   public token_id: string;
 
@@ -35,21 +34,29 @@ export class AuthService {
             this.router.navigate(['/']);
 
         }
-    )
-    })
+      );
+    });
   }
 
   public isAuth(): boolean {
-
     if(this.token_id === undefined && localStorage.getItem('idToken') !== null) {
         this.token_id = localStorage.getItem('idToken');
     }
-
     if(this.token_id === undefined && localStorage.getItem('idToken') === null) {
         this.router.navigate(['/signin']);
     }
-
     return this.token_id !== undefined;
+  }
+
+  getUser(data) {
+    this.userService.getUser(data.uid).subscribe(res=> {
+      if(res['data'].length == 0){
+        this.userService.postUser(data).subscribe(res=>res, err=> err);
+      }else{
+        _.extend(data, res['data']);
+      }
+    }, err => err);
+    return data;
   }
 
   updateUser(credential) {
@@ -60,17 +67,11 @@ export class AuthService {
       photoURL: credential.user.photoURL,
       uid: credential.user.uid
     };
-    this.userService.getUser(credential.user.uid).subscribe(res=> {
-      if(res['data'].length == 0){
-        console.log("usuario novo");
-        this.userService.postUser(data).subscribe(res=>res, err=> err);
-      }else{
-        console.log("usuario já cadastrado");
-      }
-    }, err => err);
+    data = this.getUser(data);
     this.userInfo$ = new User(data);
     localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
   }
+
   getCurrentUser() {
     return this.userInfo$;
   }
@@ -83,7 +84,7 @@ export class AuthService {
           this.token_id = undefined;
           this.router.navigate(['/signin']);
       }
-  )
+    );
   }
 }
 

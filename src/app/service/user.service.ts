@@ -10,14 +10,6 @@ export class UserService {
 
   constructor(private http : HttpClient) {}
 
-  getAjudas(id): Observable<any> {
-    return this.http.get(`${this.url}/user/getAjudasByAluno/${id}`);
-  }
-
-  addAjuda(ajuda): Observable<any> {
-    return this.http.post(`${this.url}/ajuda/postAjuda`, ajuda);
-  }
-
   getUser(id) : Observable<any> {
     return this.http.get(`${this.url}/user/getUserByUid/${id}`);
   }

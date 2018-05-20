@@ -12,7 +12,7 @@ import { HelpDetailsComponent } from './help-details/help-details.component';
 import {TutorRegisterComponent} from "./tutor-register/tutor-register.component";
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent, canActivate:[ AuthGuard ] },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: 'signin', component: AuthComponent }];
 
 const childRoutes: Routes = [
@@ -20,7 +20,7 @@ const childRoutes: Routes = [
         { path: 'help_details/:id', component: HelpDetailsComponent },
         { path: 'ask_for_help', component: AskHelpComponent }
     ] },
-  { path: '**', redirectTo: '/'}
+    { path: '**', redirectTo: '/'}
 ]
 
 @NgModule({

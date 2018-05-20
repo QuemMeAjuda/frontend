@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class HomeComponent {
 
   mobileQuery: MediaQueryList;
-  @ViewChild('ask-help') public publicacoes: any
 
   public user: User;
 
@@ -51,7 +50,9 @@ export class HomeComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-
+  isHomePage(): boolean {
+    return this.router.routerState.snapshot.url === "/";
+  }
   goToHome() {
     this.router.navigate(['/']);
   }

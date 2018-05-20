@@ -20,6 +20,7 @@ import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
 import { HelpDetailsComponent } from './help-details/help-details.component';
 import { HelpService } from './help-details/help.service';
+import { TimelineComponent } from './home/timeline/timeline.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HelpService } from './help-details/help.service';
     HomeComponent,
     AskHelpComponent,
     TutorRegisterComponent,
-    HelpDetailsComponent
+    HelpDetailsComponent,
+    TimelineComponent
   ],
   imports: [
     BrowserModule,
