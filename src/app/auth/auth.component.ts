@@ -13,7 +13,8 @@ export class AuthComponent {
 
   public logo = "assets/images/quem_me_ajuda_logo.png";
 
-  constructor(public AuthService: AuthService, private router: Router) { 
+  constructor(public AuthService: AuthService, private router: Router) {
+
     if(this.AuthService.isAuth()) {
       this.router.navigate(['/']);
     }

@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class HomeComponent {
 
   mobileQuery: MediaQueryList;
-  @ViewChild('ask-help') public publicacoes: any
 
   public user: User;
 

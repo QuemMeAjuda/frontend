@@ -6,7 +6,7 @@
           <input matInput #input [(ngModel)]="shortDesc" maxlength="144" placeholder="Descrição geral da dúvida">
           <mat-hint align="end">{{input.value?.length || 0}}/144</mat-hint>
         </mat-form-field>
-        
+
         <mat-form-field style="margin-top: 3px;">
           <textarea matInput [(ngModel)]="longDesc" placeholder="Descrição detalhada da dúvida"></textarea>
         </mat-form-field>
@@ -15,7 +15,7 @@
           <input matInput [(ngModel)]="tags" placeholder="Tags Ex.: 'While, For'">
         </mat-form-field>
 
-        <button mat-button (click)="fazAlgo(shortDesc,longDesc,tags)">Enviar Pedido</button>
+        <button mat-button (click)="sendOrder(shortDesc,longDesc,tags)">Enviar Pedido</button>
     </div>
   </div>
 

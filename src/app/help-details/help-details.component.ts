@@ -15,10 +15,16 @@ export class HelpDetailsComponent implements OnInit {
   help: any;
   @Input() receivedHelp: any;
   @Input() isTimeline: boolean;
+
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
-      private helpService: HelpService) { }
-
+      private helpService: HelpService) {
+    this.help = {
+      detailedDescription:"",
+      generalDescription: ""
+    };
+  }
+  
   ngOnInit() {
     if(this.receivedHelp) {
       this.help = this.receivedHelp;
@@ -26,7 +32,7 @@ export class HelpDetailsComponent implements OnInit {
       this.watcher = this.routeAct.params.subscribe(
         (params: any) => {
           this.id = params['id'];
-          this.help = this.helpService.getHelp(this.id);
+          this.helpService.getHelp(this.id).subscribe(res=> this.help = res['data'], err=> console.log(err));
         }
       );
     }

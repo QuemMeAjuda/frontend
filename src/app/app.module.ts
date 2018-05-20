@@ -11,6 +11,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from '@angular/http';
 
+import {UserService} from "./service/user.service";
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
@@ -34,7 +35,7 @@ import { TimelineComponent } from './home/timeline/timeline.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    
+
     NoopAnimationsModule,
     DesignModule,
     AppRoutingModule,
@@ -43,7 +44,7 @@ import { TimelineComponent } from './home/timeline/timeline.component';
     HttpModule,
   ],
   entryComponents: [HomeComponent],
-  providers: [AuthService, AuthGuard, HelpService],
+  providers: [AuthService, AuthGuard,UserService, HelpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

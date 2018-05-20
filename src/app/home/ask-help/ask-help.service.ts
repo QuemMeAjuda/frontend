@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Help } from '../../help-model/help';
- 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class AskHelpService {
 
   constructor() { }

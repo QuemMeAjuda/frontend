@@ -1,53 +1,32 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Utils} from "../utils/utils";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class HelpService {
 
+    url = Utils.urlBase;
+
     // TODO: delete when the backend work
     // and make gets direct by http
-    chickenLittle: any = {
-        name: 'Chicken Little', photoURL: 'xxx'
-    }
     helps: any = [
         {
-            title: 'Dúvida em p1',
-            author:  this.chickenLittle,
-            description: 'Como faço pra pegar o placar de um jogo, ex "3x1" independente de posicao, pois a posicao pode variar se o placar for 11x20',
-            comments: []
+            generalDescription: 'Dúvida em p1',
+            author: 'Chicken Little',
+            detailedDescription: 'Como faço pra pegar o placar de um jogo, ex "3x1" independente de posicao, pois a posicao pode variar se o placar for 11x20',
         },
         {
-            title: 'Como fazer um MergeSort em haskell?',
-            author:  this.chickenLittle,
-            description: 'Olá, gostaria de saber como implementar um merge sort em haskell',
-            comments: [{
-                author: {name: 'Wesley Anibal',
-                        id: 666,
-                        tutoringMastered: [
-                            'Progamacao 1',
-                            'Programacao 2',
-                            'Programacao Funcional',
-                            'Estrutura de Dados',
-                            'Compiladores'
-                        ]},
-                comment: 'Pega o mouse e o teclado e enfia no cu, arrombado'
-            }]
+            generalDescription: 'Como fazer um MergeSort em haskell?',
+            author:  'Chicken Little',
+            detailedDescription: 'Olá, gostaria de saber como implementar um merge sort em haskell',
         },
         {
-            title: 'Dúvida em Engenharia de Software',
-            author: this.chickenLittle,
-            description: 'O miniteste dessa semana é o miniteste 0 ou 1?',
-            comments: [{
-                author: {name: 'Chicken Big',
-                        id: 24,
-                        tutoringMastered: [
-                            'Scrum1',
-                            'Scrum2',
-                            'Scrum Master'
-                        ]},
-                comment: 'Hi! I am a Scrum master. I will explain the Scrum in a Classroom'
-            }]
+            generalDescription: 'Dúvida em Engenharia de Software',
+            author: 'Chicken Little',
+            detailedDescription: 'O miniteste dessa semana é o miniteste 0 ou 1?',
         },   
-    ]
+    ];
 
     getHelps(){
         // TODO: take all helps to show in timeline
@@ -55,10 +34,19 @@ export class HelpService {
         return this.helps;
     }
 
-    getHelp(id: any){
-        return this.helps[id] || null;
+    
+    getHelpsByUser(id): Observable<any> {
+        return this.http.get(`${this.url}/user/getAjudasByAluno/${id}`);
     }
 
-    constructor() { }
+    addHelp(help): Observable<any> {
+        return this.http.post(`${this.url}/ajuda/postAjuda`, help);
+    }
+
+    getHelp(id){
+        return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
+    }
+
+    constructor(private http :HttpClient) { }
 
 }
