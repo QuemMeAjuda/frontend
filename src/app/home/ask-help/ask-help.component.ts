@@ -1,6 +1,5 @@
 import { HelpService } from './../../help-details/help.service';
 import { Component, OnInit } from '@angular/core';
-import { AskHelpService } from './ask-help.service';
 import {AuthService} from "../../auth/auth.service";
 
 @Component({

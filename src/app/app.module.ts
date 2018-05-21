@@ -21,6 +21,7 @@ import { TutorRegisterComponent } from './tutor-register/tutor-register.componen
 import { HelpDetailsComponent } from './help-details/help-details.component';
 import { HelpService } from './help-details/help.service';
 import { TimelineComponent } from './home/timeline/timeline.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { TimelineComponent } from './home/timeline/timeline.component';
     AskHelpComponent,
     TutorRegisterComponent,
     HelpDetailsComponent,
-    TimelineComponent
+    TimelineComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
