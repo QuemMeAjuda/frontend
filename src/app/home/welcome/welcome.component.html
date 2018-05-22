@@ -1,11 +1,56 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
 </head>
-<div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'" 
-  style="left: 0;" class="centered">
-  <h2 style="font-family: 'IBM Plex Sans Condensed', sans-serif;;
-      font-size: 100%; color: #1b2531" style="width:70%">
-        Bem vindo ao QuemMeAjuda, essas são suas 
-        dúvidas respondidas até o momento:
+<div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'" style="left: 0;" class="centered">
+  <h2 style="font-family: 'IBM Plex Sans Condensed', sans-serif;
+      font-size: 100%; color: #1b2531" style="width:70%; margin:auto; margin-top: 25px">
+    Bem vindo ao QuemMeAjuda, essas são suas dúvidas respondidas até o momento:
   </h2>
+  <div *ngFor="let help of helps">
+    <div layout="column" style="margin-bottom: 15px;">
+      <div style="margin-top: 25px; right: 0;">
+        <div class="center">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                <b>{{help.generalDescription}}</b>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{help.detailedDescription}}
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <mat-accordion>
+                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      {{help.awnsers.length}} respostas
+                    </mat-panel-title>
+                    <mat-panel-description>
+                      Mostrar Respostas
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <mat-list>
+                      <mat-list-item *ngFor="let awnser of help.awnsers">
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <h3 matLine> {{awnser.author}} </h3>
+                        <p matLine>
+                          {{awnser.awnser}}
+                        </p>
+                      </mat-list-item>
+                    </mat-list>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button style="background-color: #E57373; color: white;
+   margin-bottom: 20px; float: right" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
+   <button mat-raised-button style="background-color: #006064; color: white;
+   margin-bottom: 20px; float: right; margin-right: 5px">Ir para home</button>
 </div>

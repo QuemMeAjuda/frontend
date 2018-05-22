@@ -1,3 +1,5 @@
+import { HomeComponent } from './../home.component';
+import { WelcomeService } from './welcome.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor() { }
+  helps: any;
+
+  panelOpenState: boolean = false;
+
+  constructor(private welcomeService: WelcomeService, private homeComponent: HomeComponent) { }
 
   isLargerScreen(): boolean {
     return window.screen.width >= 960;
@@ -16,7 +22,12 @@ export class WelcomeComponent implements OnInit {
     return window.screen.width <= 420;
   }
 
+  goToAskHelp() {
+    return this.homeComponent.goToAskHelp();
+  }
+
   ngOnInit() {
+    this.helps = this.welcomeService.getHelps();
   }
 
 }
