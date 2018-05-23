@@ -21,36 +21,33 @@
                 {{help.detailedDescription}}
               </p>
             </mat-card-content>
-            <mat-card-actions>
-              <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      {{help.awnsers.length}} respostas
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Mostrar Respostas
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <mat-list>
-                      <mat-list-item *ngFor="let awnser of help.awnsers">
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <h3 matLine> {{awnser.author}} </h3>
-                        <p matLine>
-                          {{awnser.awnser}}
-                        </p>
-                      </mat-list-item>
-                    </mat-list>
-                </mat-expansion-panel>
-              </mat-accordion>
-            </mat-card-actions>
+            <div [hidden]="!showAwnsersState" *ngFor="let awnser of help.awnsers" layout="column" style="margin-bottom: 15px;">
+              <div style="margin-top: 10px; right: 0;">
+                <div class="center">
+                  <mat-card>
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title style="margin-top: 10px">{{awnser.author}} respondeu:</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p style="margin-top: 10px">
+                        {{awnser.awnser}}
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+              </div>
+              </div>
+            </div>
+            <div style="float: right">
+                <button style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState()">{{help.awnsers.length}} respostas, clique para ver!</button>
+            </div>
           </mat-card>
         </div>
       </div>
     </div>
   </div>
   <button mat-raised-button style="background-color: #E57373; color: white;
-   margin-bottom: 20px; float: right" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
+   margin-bottom: 20px; margin-top: 8px; margin-right: 8px" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
    <button mat-raised-button style="background-color: #006064; color: white;
-   margin-bottom: 20px; float: right; margin-right: 5px">Ir para home</button>
+   margin-bottom: 20px; margin-top: 8px;" (click)="goToHome()">Ir para home</button>
 </div>

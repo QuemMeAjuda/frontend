@@ -12,6 +12,7 @@ export class WelcomeComponent implements OnInit {
   helps: any;
 
   panelOpenState: boolean = false;
+  showAwnsersState: boolean = false;
 
   constructor(private welcomeService: WelcomeService, private homeComponent: HomeComponent) { }
 
@@ -24,6 +25,14 @@ export class WelcomeComponent implements OnInit {
 
   goToAskHelp() {
     return this.homeComponent.goToAskHelp();
+  }
+
+  goToHome(){
+    return this.homeComponent.goToHome();
+  }
+
+  setShowAwnsersState(){
+    this.showAwnsersState = this.showAwnsersState ? false : true;
   }
 
   ngOnInit() {
