@@ -21,7 +21,7 @@
                 {{help.detailedDescription}}
               </p>
             </mat-card-content>
-            <div [hidden]="!showAwnsersState" *ngFor="let awnser of help.awnsers" layout="column" style="margin-bottom: 15px;">
+            <div [hidden]="!help.showAwnsersState" *ngFor="let awnser of help.awnsers" layout="column" style="margin-bottom: 15px;">
               <div style="margin-top: 10px; right: 0;">
                 <div class="center">
                   <mat-card>
@@ -39,15 +39,18 @@
               </div>
             </div>
             <div style="float: right">
-                <button style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState()">{{help.awnsers.length}} respostas, clique para ver!</button>
+                <button *ngIf="!help.showAwnsersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState(help)">
+                    <mat-icon>keyboard_arrow_down</mat-icon>{{help.awnsers.length}} respostas, clique para ver</button>
+                <button *ngIf="help.showAwnsersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState(help)">
+                    <mat-icon>keyboard_arrow_up</mat-icon>Esconder</button>
             </div>
           </mat-card>
         </div>
       </div>
     </div>
   </div>
-  <button mat-raised-button style="background-color: #E57373; color: white;
+  <button mat-raised-button style="background-color: #FF3D00; color: white;
    margin-bottom: 20px; margin-top: 8px; margin-right: 8px" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
-   <button mat-raised-button style="background-color: #006064; color: white;
+   <button mat-raised-button style="background-color: #004D40; color: white;
    margin-bottom: 20px; margin-top: 8px;" (click)="goToHome()">Ir para home</button>
 </div>

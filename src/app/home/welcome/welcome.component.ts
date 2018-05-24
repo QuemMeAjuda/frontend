@@ -31,8 +31,12 @@ export class WelcomeComponent implements OnInit {
     return this.homeComponent.goToHome();
   }
 
-  setShowAwnsersState(){
-    this.showAwnsersState = this.showAwnsersState ? false : true;
+  setShowAwnsersState(help: any){
+    if (help.showAwnsersState){
+      delete help.showAwnsersState;
+    }else{
+      help.showAwnsersState = true;
+    }
   }
 
   ngOnInit() {
