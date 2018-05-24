@@ -11,7 +11,6 @@ export class SignupComponent implements OnInit {
 
   protected form: FormGroup;
 
-
   constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -20,18 +19,24 @@ export class SignupComponent implements OnInit {
 
   formInitialization(){
     this.form = this._formBuilder.group({
-      firstName: [Validators.required, Validators.minLength(3), Validators.maxLength(20)],
+      firstName: [null, Validators.required],
       lastName: [null],
-      email: [Validators.required],
-      password: [Validators.required],
-      confirmPassword: [Validators.required]
+      email: [null, Validators.required],
+      university: [null, Validators.required],
+      graduation: [null, Validators.required],
+      password: [null, Validators.required],
+      confirmPassword: [null, Validators.required]
     }, {
       validator: PasswordValidation.MatchPassword
-    })
+    });
+  }
+
+  isValidForm() {
+    return this.form.valid;
   }
 
   onSubmit(){
-    console.log(this.form)
+    alert("QUEIMA QUENGARAL");
   }
 
 }
