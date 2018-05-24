@@ -1,7 +1,10 @@
 "use strict";
 
 export const Utils = {
-
+    urlBase : 'http://localhost:3000',
+    isLargerScreen:  function isLargerScreen(){
+        return window.screen.width >= 960;
+    },
     addHttpsToUrl :  function addHttpsToUrl(text, urls) {
         if(urls) {
             var http = "http://";

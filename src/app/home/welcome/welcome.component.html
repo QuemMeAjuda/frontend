@@ -1,0 +1,56 @@
+<head>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
+</head>
+<div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'" style="left: 0;" class="centered">
+  <h2 style="font-family: 'IBM Plex Sans Condensed', sans-serif;
+      font-size: 100%; color: #1b2531" style="width:70%; margin:auto; margin-top: 25px">
+    Bem vindo ao QuemMeAjuda, essas são suas dúvidas respondidas até o momento:
+  </h2>
+  <div *ngFor="let help of helps">
+    <div layout="column" style="margin-bottom: 15px;">
+      <div style="margin-top: 25px; right: 0;">
+        <div class="center">
+          <mat-card>
+            <mat-card-header>
+              <mat-card-title>
+                <b>{{help.generalDescription}}</b>
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <p>
+                {{help.detailedDescription}}
+              </p>
+            </mat-card-content>
+            <div [hidden]="!help.showAwnsersState" *ngFor="let awnser of help.awnsers" layout="column" style="margin-bottom: 15px;">
+              <div style="margin-top: 10px; right: 0;">
+                <div class="center">
+                  <mat-card>
+                    <mat-card-header>
+                      <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title style="margin-top: 10px">{{awnser.author}} respondeu:</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p style="margin-top: 10px">
+                        {{awnser.awnser}}
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+              </div>
+              </div>
+            </div>
+            <div style="float: right">
+                <button *ngIf="!help.showAwnsersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState(help)">
+                    <mat-icon>keyboard_arrow_down</mat-icon>{{help.awnsers.length}} respostas, clique para ver</button>
+                <button *ngIf="help.showAwnsersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState(help)">
+                    <mat-icon>keyboard_arrow_up</mat-icon>Esconder</button>
+            </div>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-raised-button style="background-color: #FF3D00; color: white;
+   margin-bottom: 20px; margin-top: 8px; margin-right: 8px" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
+   <button mat-raised-button style="background-color: #004D40; color: white;
+   margin-bottom: 20px; margin-top: 8px;" (click)="goToHome()">Ir para home</button>
+</div>

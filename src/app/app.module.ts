@@ -7,28 +7,36 @@ import { AppComponent } from './app.component';
 import { DesignModule } from './design.module';
 
 import { environment } from '../environments/environment';
-// Firebase imports
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 
 import { HttpClientModule } from "@angular/common/http";
 import { HttpModule } from '@angular/http';
 
+import {UserService} from "./service/user.service";
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { AskHelpComponent } from './home/ask-help/ask-help.component';
+import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
+import { HelpDetailsComponent } from './help-details/help-details.component';
+import { HelpService } from './help-details/help.service';
+import { TimelineComponent } from './home/timeline/timeline.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent,
+    AskHelpComponent,
+    TutorRegisterComponent,
+    HelpDetailsComponent,
+    TimelineComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -39,13 +47,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     HttpClientModule,
     HttpModule,
-    AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AngularFirestoreModule,
-    FormsModule,
-    ReactiveFormsModule
   ],
-  providers: [AuthService, AuthGuard],
+  entryComponents: [HomeComponent],
+  providers: [AuthService, AuthGuard,UserService, HelpService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

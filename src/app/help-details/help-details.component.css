@@ -1,0 +1,22 @@
+.example-card {
+    max-width: 400px;
+  }
+  
+.fixed-card {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+}
+  .example-header-image {
+    background-image: url('https://img.meutimao.com.br/_upload/forumtopico/2017/03/13/qeqv9vj.png');
+    background-size: cover;
+  }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+
+}

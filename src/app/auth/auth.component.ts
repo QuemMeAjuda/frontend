@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from './user';
 import { AuthService } from './auth.service';
 import { Router } from '@angular/router';
@@ -8,14 +8,13 @@ import { Router } from '@angular/router';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent {
   user: User;
 
   public logo = "assets/images/quem_me_ajuda_logo.png";
 
-  constructor(public AuthService: AuthService, private router: Router) { }
+  constructor(public AuthService: AuthService, private router: Router) {
 
-  ngOnInit() {
     if(this.AuthService.isAuth()) {
       this.router.navigate(['/']);
     }

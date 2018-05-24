@@ -1,0 +1,23 @@
+<div layout="column" style="margin-top: 30px;">
+
+  <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen'" class="centered">
+    <div class="ask_help-container" style="background: white;">
+        <mat-form-field hintLabel="Máximo 144 carácters">
+          <input matInput #input [(ngModel)]="shortDesc" maxlength="144" placeholder="Descrição geral da dúvida">
+          <mat-hint align="end">{{input.value?.length || 0}}/144</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field style="margin-top: 3px;">
+          <textarea matInput [(ngModel)]="longDesc" placeholder="Descrição detalhada da dúvida"></textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput [(ngModel)]="tags" placeholder="Tags Ex.: 'While, For'">
+        </mat-form-field>
+
+        <button mat-button (click)="sendOrder(shortDesc,longDesc,tags)">Enviar Pedido</button>
+    </div>
+  </div>
+
+</div>
+
