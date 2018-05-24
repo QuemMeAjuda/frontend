@@ -8,13 +8,15 @@ import { AuthComponent } from './auth/auth.component';
 import { HomeComponent } from './home/home.component';
 import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { AuthGuard } from './auth/auth.guard';
+import {SignupComponent} from "./signup/signup.component";
 
 import { HelpDetailsComponent } from './help-details/help-details.component';
 import {TutorRegisterComponent} from "./tutor-register/tutor-register.component";
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'signin', component: AuthComponent }];
+  { path: 'signin', component: AuthComponent },
+  { path: 'signup', component: SignupComponent}];
 
 const childRoutes: Routes = [
     { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [

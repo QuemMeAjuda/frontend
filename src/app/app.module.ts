@@ -16,6 +16,8 @@ import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 import { HomeComponent } from './home/home.component';
+import { SignupComponent } from './signup/signup.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
 import { HelpDetailsComponent } from './help-details/help-details.component';
@@ -28,6 +30,8 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
     AppComponent,
     AuthComponent,
     HomeComponent,
+    SignupComponent,
+    HomeComponent,
     AskHelpComponent,
     TutorRegisterComponent,
     HelpDetailsComponent,
@@ -37,7 +41,6 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
     NoopAnimationsModule,
     DesignModule,
     AppRoutingModule,
