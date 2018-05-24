@@ -36,7 +36,9 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    alert("QUEIMA QUENGARAL");
+    /**
+     * TODO: Implement User registration service and link with backend
+     */
   }
 
 }
