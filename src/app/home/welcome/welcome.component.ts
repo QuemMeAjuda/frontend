@@ -1,6 +1,8 @@
 import { HomeComponent } from './../home.component';
 import { WelcomeService } from './welcome.service';
 import { Component, OnInit } from '@angular/core';
+import {HelpService} from "../../help-details/help.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-welcome',
@@ -14,7 +16,7 @@ export class WelcomeComponent implements OnInit {
   panelOpenState: boolean = false;
   showAwnsersState: boolean = false;
 
-  constructor(private welcomeService: WelcomeService, private homeComponent: HomeComponent) { }
+  constructor(private homeComponent: HomeComponent, private helpService: HelpService, private authService: AuthService) { }
 
   isLargerScreen(): boolean {
     return window.screen.width >= 960;
@@ -40,7 +42,9 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.helps = this.welcomeService.getHelps();
+    this.helpService.getHelpsByUser(this.authService.getCurrentUser().info['uid']).subscribe(res=>{
+      this.helps = res['data'];
+    }, err=> console.log(err));
   }
 
 }
