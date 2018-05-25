@@ -50,13 +50,13 @@ export class AuthService {
 
   getUser(data) {
     this.userService.getUser(data.uid).subscribe(res=> {
-      if(res['data'].length == 0){
-        this.userService.postUser(data).subscribe(res=>res, err=> err);
+
+      if(res.data.length === 0){
+        this.router.navigate(['/signup']);
       }else{
         _.extend(data, res['data']);
       }
     }, err => err);
-    return data;
   }
 
   updateUser(credential) {
@@ -67,7 +67,7 @@ export class AuthService {
       photoURL: credential.user.photoURL,
       uid: credential.user.uid
     };
-    data = this.getUser(data);
+    this.getUser(data);
     this.userInfo$ = new User(data);
     localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
   }

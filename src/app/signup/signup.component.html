@@ -23,16 +23,6 @@
         <input type="text" matInput placeholder="Curso" formControlName="graduation" required>
       </mat-form-field>
       <br>
-      <mat-form-field>
-        <input type="password" matInput placeholder="Senha" formControlName="password" required>
-      </mat-form-field>
-      <br>
-      <mat-form-field>
-        <input type="password" matInput placeholder="Confirme sua senha" formControlName="confirmPassword" required>
-      </mat-form-field>
-      <div class="alert alert-danger" *ngIf="form.controls.confirmPassword.errors?.MatchPassword">
-        Senha não confere
-      </div>
     </form>
   </mat-card-content>
   <mat-card-actions >

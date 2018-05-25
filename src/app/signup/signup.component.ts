@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PasswordValidation} from "./passwordValidation.component";
+import {UserService} from "../service/user.service";
+import {Router} from "@angular/router";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +14,10 @@ export class SignupComponent implements OnInit {
 
   protected form: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+              private userService : UserService,
+              private router : Router,
+              private authService : AuthService) { }
 
   ngOnInit() {
     this.formInitialization()
@@ -23,12 +29,8 @@ export class SignupComponent implements OnInit {
       lastName: [null],
       email: [null, Validators.required],
       university: [null, Validators.required],
-      graduation: [null, Validators.required],
-      password: [null, Validators.required],
-      confirmPassword: [null, Validators.required]
-    }, {
-      validator: PasswordValidation.MatchPassword
-    });
+      graduation: [null, Validators.required]
+      });
   }
 
   isValidForm() {
@@ -36,9 +38,19 @@ export class SignupComponent implements OnInit {
   }
 
   onSubmit(){
-    /**
-     * TODO: Implement User registration service and link with backend
-     */
+    let fore = this.form.value;
+    var data = {
+      name: fore.firstName + ' ' + fore.lastName,
+      email: fore.email,
+      university: fore.university,
+      graduation: fore.graduation,
+      uid : this.authService.getCurrentUser().info['uid']
+    }
+
+    this.userService.postUser(data).subscribe(
+      res=> console.log(res),
+        err => console.log(err));
+    this.router.navigate(['/']);
   }
 
 }

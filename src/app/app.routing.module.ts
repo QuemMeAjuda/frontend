@@ -15,8 +15,9 @@ import {TutorRegisterComponent} from "./tutor-register/tutor-register.component"
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
-  { path: 'signin', component: AuthComponent },
-  { path: 'signup', component: SignupComponent}];
+  { path: 'signup', component: SignupComponent},
+  { path: 'signin', component: AuthComponent }
+  ];
 
 const childRoutes: Routes = [
     { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [

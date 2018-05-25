@@ -14,12 +14,7 @@ export class UserService {
     return this.http.get(`${this.url}/user/getUserByUid/${id}`);
   }
 
-  postUser(user): Observable<any>{
-    let data = {
-      name: user.name,
-      uid: user.uid
-    };
-
+  postUser(data): Observable<any>{
     return this.http.post(`${this.url}/user/postUser`, data);
   }
 }
