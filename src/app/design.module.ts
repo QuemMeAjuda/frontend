@@ -7,8 +7,7 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatToolbarModule,
-  MatStepperModule
+  MatToolbarModule
 } from '@angular/material';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
@@ -91,6 +90,7 @@ import {
     MatTabsModule,
     MatTooltipModule,
     MatTreeModule,
+    ReactiveFormsModule
   ],
   exports: [
     FormsModule,
@@ -140,6 +140,7 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    ReactiveFormsModule
   ],
   declarations: []
 })
