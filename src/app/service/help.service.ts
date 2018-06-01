@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Utils} from "../utils/utils";
 import {Observable} from "rxjs/Observable";
+import * as _ from 'lodash';
 
 @Injectable()
 export class HelpService {
@@ -28,13 +29,29 @@ export class HelpService {
         },   
     ];
 
-    getHelps(){
+    getAllHelps(){
         // TODO: take all helps to show in timeline
         //  think in way to get 10 for paginated timeline
         return this.helps;
     }
 
-    
+    getIntervalOfHelps(beginInterval, endInterval, helps) {
+        if(endInterval <= helps.length) {
+            return _.reverse(helps).slice(beginInterval, endInterval);
+        } else if(endInterval > helps.length && beginInterval < helps.length) {
+            return _.reverse(helps).slice(beginInterval, helps.length);
+        } else {
+            return [];
+        }
+    }
+
+    getHelpsPage(numPage: any) {
+        const endInterval = (Number(numPage)+1) * 10;
+        const beginInterval = endInterval - 10;
+        const helps = _.cloneDeep(this.helps);
+        return this.getIntervalOfHelps(beginInterval, endInterval, helps);
+    }
+
     getHelpsByUser(id): Observable<any> {
         return this.http.get(`${this.url}/user/getAjudasByAluno/${id}`);
     }
@@ -47,6 +64,13 @@ export class HelpService {
         return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
     }
 
-    constructor(private http :HttpClient) { }
+    constructor(private http :HttpClient) {
+        const help = this.helps[0];
+        for(var i = 0; i < 50; i++) {
+            var x = _.cloneDeep(help);
+            x.generalDescription += "-" + String(i+1);
+            this.helps.push(x);
+        }
+    }
 
 }

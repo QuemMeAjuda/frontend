@@ -14,14 +14,14 @@ import { HttpModule } from '@angular/http';
 import {UserService} from "./service/user.service";
 import { AuthComponent } from './auth/auth.component';
 import { AuthGuard} from './auth/auth.guard';
-import { AuthService } from './auth/auth.service';
+import { AuthService } from './service/auth.service';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
 import { HelpDetailsComponent } from './help-details/help-details.component';
-import { HelpService } from './help-details/help.service';
+import { HelpService } from './service/help.service';
 import { TimelineComponent } from './home/timeline/timeline.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 

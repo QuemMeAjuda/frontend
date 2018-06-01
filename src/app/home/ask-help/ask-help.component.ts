@@ -1,6 +1,6 @@
-import { HelpService } from './../../help-details/help.service';
+import { HelpService } from './../../service/help.service';
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../auth/auth.service";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-ask-help',

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import {MediaMatcher} from '@angular/cdk/layout';
 import {ChangeDetectorRef} from '@angular/core';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../service/auth.service';
 import { User } from '../auth/user';
 import { Router } from '@angular/router';
 
@@ -50,14 +50,14 @@ export class HomeComponent {
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }
-  isHomePage(): boolean {
-    return this.router.routerState.snapshot.url === "/";
-  }
   goToHome() {
-    this.router.navigate(['/']);
+    this.router.navigate(['/home']);
   }
   goToAskHelp() {
     this.router.navigate(['/ask_for_help']);
+  }
+  goToOwnHelps() {
+    this.router.navigate(['/welcome']);
   }
   logout(): void {
     this.auth.logout();

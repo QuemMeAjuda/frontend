@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs/Observable';
 import * as firebase from 'firebase/app';
-import { User } from './user';
+import { User } from '../auth/user';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router'
 import {UserService} from "../service/user.service";

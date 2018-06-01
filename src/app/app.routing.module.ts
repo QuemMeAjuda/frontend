@@ -12,19 +12,22 @@ import {SignupComponent} from "./signup/signup.component";
 
 import { HelpDetailsComponent } from './help-details/help-details.component';
 import {TutorRegisterComponent} from "./tutor-register/tutor-register.component";
+import { TimelineComponent } from './home/timeline/timeline.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '', redirectTo: '/home/0', pathMatch: 'full' },
   { path: 'signin', component: AuthComponent },
   { path: 'signup', component: SignupComponent}];
 
 const childRoutes: Routes = [
     { path: '',  component: HomeComponent, canActivate:[ AuthGuard ], children: [
+        { path: 'home/:page', component: TimelineComponent },
         { path: 'help_details/:id', component: HelpDetailsComponent },
         { path: 'ask_for_help', component: AskHelpComponent },
         { path: 'welcome', component: WelcomeComponent }
     ] },
-    { path: '**', redirectTo: '/'}
+    // TODO: make NOT FOUND page to redirect
+    { path: '**', redirectTo: '/home/0'}
 ]
 
 @NgModule({
