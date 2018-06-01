@@ -7,16 +7,15 @@
   display: flex;
   flex-direction: column;
 }
-  .example-header-image {
+.example-header-image {
     background-image: url('https://img.meutimao.com.br/_upload/forumtopico/2017/03/13/qeqv9vj.png');
     background-size: cover;
-  }
+}
 
-  .center {
+.center {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: auto;
     width: 80%;
-
 }

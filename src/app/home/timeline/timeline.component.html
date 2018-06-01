@@ -3,4 +3,10 @@
   [receivedHelp]="help"
   [isTimeline]="true">
   </app-help-details>
+  <div layout="row" class="center" style="margin-bottom: 20px;">
+    <button mat-button (click)="firstPage()">Primeira página</button>
+    <button mat-button (click)="previousPage()">Página anterior</button>
+    <button mat-button (click)="nextPage()">Proxima página</button>
+    <button mat-button (click)="lastPage()">Última página</button>
+  </div>
 </div>

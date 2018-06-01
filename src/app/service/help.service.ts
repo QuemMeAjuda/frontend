@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Utils} from "../utils/utils";
 import {Observable} from "rxjs/Observable";
+import * as _ from 'lodash';
 
 @Injectable()
 export class HelpService {
@@ -28,13 +29,24 @@ export class HelpService {
         },   
     ];
 
-    getHelps(){
+    getAllHelps(){
         // TODO: take all helps to show in timeline
         //  think in way to get 10 for paginated timeline
         return this.helps;
     }
 
-    
+    getHelpPage(numPage: any) {
+        let endInterval = (Number(numPage)+1) * 10;
+        let beginInterval = endInterval - 10;
+        if(endInterval <= this.helps.length) {
+            return _.reverse(this.helps).slice(beginInterval, endInterval);
+        } else if(endInterval > this.helps.length && beginInterval < this.helps.length) {
+            return _.reverse(this.helps).slice(beginInterval, this.helps.length);
+        } else {
+            return [];
+        }
+    }
+
     getHelpsByUser(id): Observable<any> {
         return this.http.get(`${this.url}/user/getAjudasByAluno/${id}`);
     }
@@ -47,6 +59,13 @@ export class HelpService {
         return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
     }
 
-    constructor(private http :HttpClient) { }
+    constructor(private http :HttpClient) {
+        const help = this.helps[0];
+        for(var i = 0; i < 50; i++) {
+            var x = _.cloneDeep(help);
+            x.generalDescription += "-" + String(i+1);
+            this.helps.push(x);
+        }
+    }
 
 }

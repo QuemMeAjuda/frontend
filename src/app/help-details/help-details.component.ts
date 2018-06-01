@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
-import { HelpService } from './help.service';
+import { HelpService } from '../service/help.service';
 
 @Component({
   selector: 'app-help-details',
