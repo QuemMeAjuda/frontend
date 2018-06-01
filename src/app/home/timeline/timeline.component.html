@@ -4,9 +4,14 @@
   [isTimeline]="true">
   </app-help-details>
   <div layout="row" class="center" style="margin-bottom: 20px;">
-    <button mat-button (click)="firstPage()">Primeira página</button>
-    <button mat-button (click)="previousPage()">Página anterior</button>
-    <button mat-button (click)="nextPage()">Proxima página</button>
-    <button mat-button (click)="lastPage()">Última página</button>
+    <button mat-button (click)="previousPage()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+      Página anterior
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button (click)="nextPage()">
+      Proxima página
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
   </div>
 </div>

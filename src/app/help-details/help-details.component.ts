@@ -39,6 +39,8 @@ export class HelpDetailsComponent implements OnInit {
   }
 
   ngOnDestroy(){
-    this.watcher.unsubscribe();
+    if (this.watcher) {
+      this.watcher.unsubscribe();
+    }
   }
 }

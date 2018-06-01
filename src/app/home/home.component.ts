@@ -56,6 +56,9 @@ export class HomeComponent {
   goToAskHelp() {
     this.router.navigate(['/ask_for_help']);
   }
+  goToOwnHelps() {
+    this.router.navigate(['/welcome']);
+  }
   logout(): void {
     this.auth.logout();
   }

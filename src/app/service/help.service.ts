@@ -35,16 +35,21 @@ export class HelpService {
         return this.helps;
     }
 
-    getHelpPage(numPage: any) {
-        let endInterval = (Number(numPage)+1) * 10;
-        let beginInterval = endInterval - 10;
-        if(endInterval <= this.helps.length) {
-            return _.reverse(this.helps).slice(beginInterval, endInterval);
-        } else if(endInterval > this.helps.length && beginInterval < this.helps.length) {
-            return _.reverse(this.helps).slice(beginInterval, this.helps.length);
+    getIntervalOfHelps(beginInterval, endInterval, helps) {
+        if(endInterval <= helps.length) {
+            return _.reverse(helps).slice(beginInterval, endInterval);
+        } else if(endInterval > helps.length && beginInterval < helps.length) {
+            return _.reverse(helps).slice(beginInterval, helps.length);
         } else {
             return [];
         }
+    }
+
+    getHelpsPage(numPage: any) {
+        const endInterval = (Number(numPage)+1) * 10;
+        const beginInterval = endInterval - 10;
+        const helps = _.cloneDeep(this.helps);
+        return this.getIntervalOfHelps(beginInterval, endInterval, helps);
     }
 
     getHelpsByUser(id): Observable<any> {
