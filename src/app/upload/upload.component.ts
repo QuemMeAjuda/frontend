@@ -1,14 +1,15 @@
-import {
-  AngularFireStorage,
-  AngularFireUploadTask
-} from 'angularfire2/storage';
+import { Component } from '@angular/core';
+import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
 
-@Injectable()
-export class UploadPageComponent {
+@Component({
+  selector: 'app-upload',
+  templateUrl: './upload.component.html',
+  styleUrls: ['./upload.component.scss']
+})
+export class UploadComponent {
   // Main task
   task: AngularFireUploadTask;
 
@@ -20,26 +21,33 @@ export class UploadPageComponent {
   // Download URL
   downloadURL: Observable<string>;
 
+  // State for dropzone CSS toggling
+  isHovering: boolean;
+
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore
   ) {}
 
+  toggleHover(event: boolean) {
+    this.isHovering = event;
+  }
+
   startUpload(event: FileList) {
     // The File object
     const file = event.item(0);
 
-    // Client-side validation example
+    // Client-side validation
     if (file.type.split('/')[0] !== 'image') {
       console.error('unsupported file type :( ');
       return;
     }
 
     // The storage path
-    const path = `test/${new Date().getTime()}_${file.name}`;
+    const path = `images/${new Date().getTime()}_${file.name}`;
 
     // Totally optional metadata
-    const customMetadata = { app: 'My AngularFire-powered PWA!' };
+    const customMetadata = { app: 'QuemMeAjuda' };
 
     // The main task
     this.task = this.storage.upload(path, file, { customMetadata });
@@ -53,11 +61,9 @@ export class UploadPageComponent {
           this.db.collection('photos').add({ path, size: snap.totalBytes });
         }
       }),
+       // The file's download URL
       finalize(() => this.downloadURL = this.storage.ref(path).getDownloadURL() )
     );
-
-
-    // The file's download URL
   }
 
   // Determines if the upload task is active
