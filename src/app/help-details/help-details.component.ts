@@ -32,7 +32,8 @@ export class HelpDetailsComponent implements OnInit {
       this.watcher = this.routeAct.params.subscribe(
         (params: any) => {
           this.id = params['id'];
-          this.helpService.getHelp(this.id).subscribe(res=> this.help = res['data'], err=> console.log(err));
+          this.help = this.helpService.getHelp(this.id);
+          //this.helpService.getHelp(this.id).subscribe(res=> this.help = res['data'], err=> console.log(err));
         }
       );
     }

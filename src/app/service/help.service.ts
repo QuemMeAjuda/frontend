@@ -13,16 +13,19 @@ export class HelpService {
     // and make gets direct by http
     helps: any = [
         {
+            id: 0,
             generalDescription: 'Dúvida em p1',
             author: 'Chicken Little',
             detailedDescription: 'Como faço pra pegar o placar de um jogo, ex "3x1" independente de posicao, pois a posicao pode variar se o placar for 11x20',
         },
         {
+            id: 1,
             generalDescription: 'Como fazer um MergeSort em haskell?',
             author:  'Chicken Little',
             detailedDescription: 'Olá, gostaria de saber como implementar um merge sort em haskell',
         },
         {
+            id: 2,
             generalDescription: 'Dúvida em Engenharia de Software',
             author: 'Chicken Little',
             detailedDescription: 'O miniteste dessa semana é o miniteste 0 ou 1?',
@@ -61,15 +64,19 @@ export class HelpService {
     }
 
     getHelp(id){
-        return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
+        return this.helps.filter(h => h.id == id)[0];
+        //return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
     }
 
     constructor(private http :HttpClient) {
+        let id = 3;
         const help = this.helps[0];
         for(var i = 0; i < 50; i++) {
             var x = _.cloneDeep(help);
             x.generalDescription += "-" + String(i+1);
+            x.id = id
             this.helps.push(x);
+            id+=1;
         }
     }
 
