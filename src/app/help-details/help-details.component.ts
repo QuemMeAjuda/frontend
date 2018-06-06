@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { HelpService } from '../service/help.service';
+import { AuthService } from '../service/auth.service';
+import { User } from '../auth/user';
 
 @Component({
   selector: 'app-help-details',
@@ -10,6 +12,7 @@ import { HelpService } from '../service/help.service';
 })
 export class HelpDetailsComponent implements OnInit {
 
+  public user : User;
   id: any;
   watcher: Subscription;
   help: any;
@@ -18,11 +21,17 @@ export class HelpDetailsComponent implements OnInit {
 
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
-      private helpService: HelpService) {
+      private helpService: HelpService,
+      private auth: AuthService) {
+    this.user = this.auth.getCurrentUser();
     this.help = {
       detailedDescription:"",
       generalDescription: ""
     };
+  }
+
+  goToHelp(id: any) {
+    this.router.navigate(['/help_details/' + id]);
   }
   
   ngOnInit() {

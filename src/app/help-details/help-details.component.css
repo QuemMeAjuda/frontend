@@ -12,6 +12,11 @@
     background-size: cover;
 }
 
+.example-header-image2 {
+    background-image: url('https://vignette.wikia.nocookie.net/ednaldo-pereira/images/5/53/Ednaldo_Pereira.jpg/revision/latest?cb=20160615234814&path-prefix=pt-br');
+    background-size: cover;
+  }
+
 .center {
     display: flex;
     justify-content: center;

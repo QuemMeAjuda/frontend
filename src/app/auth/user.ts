@@ -6,5 +6,6 @@ export class User {
 
     constructor(data: any) {
         _.extend(this.info, data);
+        //this.info.skills = ["p1","eda","ATAL"];
     }
 }
