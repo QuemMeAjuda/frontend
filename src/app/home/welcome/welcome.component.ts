@@ -12,7 +12,7 @@ export class WelcomeComponent implements OnInit {
   helps: any;
 
   panelOpenState: boolean = false;
-  showAwnsersState: boolean = false;
+  showanswersState: boolean = false;
 
   constructor(private welcomeService: WelcomeService, private homeComponent: HomeComponent) { }
 
@@ -31,11 +31,11 @@ export class WelcomeComponent implements OnInit {
     return this.homeComponent.goToHome();
   }
 
-  setShowAwnsersState(help: any){
-    if (help.showAwnsersState){
-      delete help.showAwnsersState;
+  setShowanswersState(help: any){
+    if (help.showanswersState){
+      delete help.showanswersState;
     }else{
-      help.showAwnsersState = true;
+      help.showanswersState = true;
     }
   }
 

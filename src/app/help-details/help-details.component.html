@@ -22,28 +22,36 @@
         <p>
             Respostas:
         </p>
-        <h4 *ngIf="help.awnsers.length === 0" >Sem respostas até o momento =(</h4>
-        <div *ngFor="let awnser of help.awnsers" layout="column" style="margin-bottom: 15px;">
+        <h4 *ngIf="help.answers.length === 0" >Sem respostas até o momento =(</h4>
+        <div *ngFor="let answer of help.answers" layout="column" style="margin-bottom: 15px;">
           <div style="margin-top: 10px; right: 0;">
             <div>
               <mat-card>
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image2"></div>
-                  <mat-card-title style="margin-top: 10px">{{awnser.author}} respondeu:</mat-card-title>
+                  <mat-card-title style="margin-top: 10px">{{answer.author}} respondeu:</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                   <p style="margin-top: 10px">
-                    {{awnser.awnser}}
+                    {{answer.answer}}
                   </p>
                 </mat-card-content>
+              <button *ngIf="user.info.uid == answer.uid" mat-button style="float: right" (click)="deleteAwnser()">
+                <mat-icon style="padding-bottom: 19px">delete</mat-icon></button>
               </mat-card>
           </div>
           </div>
         </div>
       </div>
+      <form *ngIf="!isTimeline" class="answer-class">
+        <mat-form-field class="answer-class-width">
+          <textarea name="answer" matInput placeholder="Deixe sua resposta" [(ngModel)]="currentAnswer"></textarea>
+        </mat-form-field>
+      </form>
         <mat-card-actions>
           <button *ngIf="isTimeline" mat-button (click)="goToHelp(help.id)">Ir para ajuda</button>
-          <button *ngIf="!isTimeline" mat-button>Responder</button>
+          <button *ngIf="!isTimeline && user.isTutor()" mat-button (click)="addanswer(currentAnswer)"
+          style="background-color: rgb(27, 104, 155); color: white;"><mat-icon style="padding-right: 3px">send</mat-icon>Responder</button>
         </mat-card-actions>
       </mat-card>
   </div>

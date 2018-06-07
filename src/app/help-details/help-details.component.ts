@@ -13,6 +13,7 @@ import { User } from '../auth/user';
 export class HelpDetailsComponent implements OnInit {
 
   public user : User;
+  public currentAnswer : string;
   id: any;
   watcher: Subscription;
   help: any;
@@ -32,6 +33,22 @@ export class HelpDetailsComponent implements OnInit {
 
   goToHelp(id: any) {
     this.router.navigate(['/help_details/' + id]);
+  }
+
+  addanswer(currentAnswer){
+    const answer = {
+      author : this.user.info.name,
+      answer: currentAnswer,
+      uid : this.user.info.uid,
+      id : "a"
+    }
+    answer.id = answer.answer + answer.uid;
+    this.help.answers.push(answer);
+    this.currentAnswer = "";
+  }
+
+  deleteAwnser(){
+
   }
   
   ngOnInit() {
