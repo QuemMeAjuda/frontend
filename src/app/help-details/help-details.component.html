@@ -36,7 +36,7 @@
                     {{answer.answer}}
                   </p>
                 </mat-card-content>
-              <button *ngIf="user.info.uid == answer.uid" mat-button style="float: right" (click)="deleteAwnser()">
+              <button *ngIf="user.info.uid == answer.uid" mat-button style="float: right" (click)="deleteAwnser(answer.aid)">
                 <mat-icon style="padding-bottom: 19px">delete</mat-icon></button>
               </mat-card>
           </div>

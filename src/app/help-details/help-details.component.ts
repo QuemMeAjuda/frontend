@@ -40,15 +40,18 @@ export class HelpDetailsComponent implements OnInit {
       author : this.user.info.name,
       answer: currentAnswer,
       uid : this.user.info.uid,
-      id : "a"
+      id : "a",
+      aid: this.help.answers.length
     }
     answer.id = answer.answer + answer.uid;
     this.help.answers.push(answer);
     this.currentAnswer = "";
+    
   }
 
-  deleteAwnser(){
-
+  //Quando a resposta vir do backend, mudar logica para excluir a resposta com o determinado
+  deleteAwnser(aid){
+    this.help.answers.splice(aid,1);
   }
   
   ngOnInit() {

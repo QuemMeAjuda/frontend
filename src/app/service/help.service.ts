@@ -101,7 +101,7 @@ export class HelpService {
             this.helps.push(x);
             id+=1;
         }
-        this.helps = this.helps.filter(h => h.answers.map(x => x.uid = "indefinido"));
+        this.helps = this.helps.filter(h => h.answers.map(x => {x.uid = "indefinido";x.aid = -1}));
     }
 
 }
