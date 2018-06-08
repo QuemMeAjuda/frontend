@@ -8,7 +8,7 @@ export class User {
 
         this.info = {};
         
-        //para fins de teste
+        //para fins de teste, use o email que voce esta logado para logar como tutor (competencies > 0)
         if (data.email === "rubens.sousa@ccc.ufcg.edu.br"){
             data.competencies = ["p1","LEDA","ATAL"];
         }
