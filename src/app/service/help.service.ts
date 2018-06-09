@@ -13,19 +13,45 @@ export class HelpService {
     // and make gets direct by http
     helps: any = [
         {
+            id: 0,
             generalDescription: 'Dúvida em p1',
             author: 'Chicken Little',
             detailedDescription: 'Como faço pra pegar o placar de um jogo, ex "3x1" independente de posicao, pois a posicao pode variar se o placar for 11x20',
+            answers: [
+                {
+                    author: "Ednaldo Pereira",
+                    answer: "Ednaldo Pereira",
+                },
+            
+                {
+                    author: "Ednaldo Pereira",
+                    answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                }
+            ]
         },
         {
+            id: 1,
             generalDescription: 'Como fazer um MergeSort em haskell?',
             author:  'Chicken Little',
             detailedDescription: 'Olá, gostaria de saber como implementar um merge sort em haskell',
+            answers: [
+                {
+                    author: "Ednaldo Pereira",
+                    answer: "Ednaldo Pereira",
+                },
+            
+                {
+                    author: "Ednaldo Pereira",
+                    answer: "50kilo bytes de encryptionKKKKK KKKKKK KKKKKKKKKKK KKKKKKKKKKKK KKKKKKKKK KKKKKKKK KKKKK KKKKKKKKK KKKK KKKKKKKKKKKK",
+                }
+            ]
         },
         {
+            id: 2,
             generalDescription: 'Dúvida em Engenharia de Software',
             author: 'Chicken Little',
             detailedDescription: 'O miniteste dessa semana é o miniteste 0 ou 1?',
+            answers: []
         },   
     ];
 
@@ -61,16 +87,21 @@ export class HelpService {
     }
 
     getHelp(id){
-        return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
+        return this.helps.filter(h => h.id == id)[0];
+        //return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
     }
 
     constructor(private http :HttpClient) {
+        let id = 3;
         const help = this.helps[0];
         for(var i = 0; i < 50; i++) {
             var x = _.cloneDeep(help);
             x.generalDescription += "-" + String(i+1);
+            x.id = id
             this.helps.push(x);
+            id+=1;
         }
+        this.helps = this.helps.filter(h => h.answers.map(x => {x.uid = "indefinido";x.aid = -1}));
     }
 
 }
