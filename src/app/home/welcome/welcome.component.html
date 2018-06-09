@@ -21,17 +21,17 @@
                 {{help.detailedDescription}}
               </p>
             </mat-card-content>
-            <div [hidden]="!help.showAwnsersState" *ngFor="let awnser of help.awnsers" layout="column" style="margin-bottom: 15px;">
+            <div [hidden]="!help.showanswersState" *ngFor="let answer of help.answers" layout="column" style="margin-bottom: 15px;">
               <div style="margin-top: 10px; right: 0;">
                 <div class="center">
                   <mat-card>
                     <mat-card-header>
                       <div mat-card-avatar class="example-header-image"></div>
-                      <mat-card-title style="margin-top: 10px">{{awnser.author}} respondeu:</mat-card-title>
+                      <mat-card-title style="margin-top: 10px">{{answer.author}} respondeu:</mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                       <p style="margin-top: 10px">
-                        {{awnser.awnser}}
+                        {{answer.answer}}
                       </p>
                     </mat-card-content>
                   </mat-card>
@@ -39,9 +39,9 @@
               </div>
             </div>
             <div style="float: right">
-                <button *ngIf="!help.showAwnsersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState(help)">
-                    <mat-icon>keyboard_arrow_down</mat-icon>{{help.awnsers.length}} respostas, clique para ver</button>
-                <button *ngIf="help.showAwnsersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowAwnsersState(help)">
+                <button *ngIf="!help.showanswersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowanswersState(help)">
+                    <mat-icon>keyboard_arrow_down</mat-icon>{{help.answers.length}} respostas, clique para ver</button>
+                <button *ngIf="help.showanswersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowanswersState(help)">
                     <mat-icon>keyboard_arrow_up</mat-icon>Esconder</button>
             </div>
           </mat-card>
