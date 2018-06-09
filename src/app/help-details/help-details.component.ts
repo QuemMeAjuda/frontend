@@ -17,6 +17,8 @@ export class HelpDetailsComponent implements OnInit {
   id: any;
   watcher: Subscription;
   help: any;
+  commentWithPhoto = false;
+  disabled = false;
   @Input() receivedHelp: any;
   @Input() isTimeline: boolean;
 
@@ -35,7 +37,7 @@ export class HelpDetailsComponent implements OnInit {
     this.router.navigate(['/help_details/' + id]);
   }
 
-  addanswer(currentAnswer){
+  addAnswer(currentAnswer){
     const answer = {
       author : this.user.info.name,
       answer: currentAnswer,
@@ -53,7 +55,7 @@ export class HelpDetailsComponent implements OnInit {
   deleteAwnser(aid){
     this.help.answers.splice(aid,1);
   }
-  
+
   ngOnInit() {
     if(this.receivedHelp) {
       this.help = this.receivedHelp;
