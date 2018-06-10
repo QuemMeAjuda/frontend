@@ -32,7 +32,6 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireFunctionsModule } from 'angularfire2/functions';
 
 @NgModule({
   declarations: [
@@ -63,7 +62,6 @@ import { AngularFireFunctionsModule } from 'angularfire2/functions';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFireFunctionsModule,
   ],
   entryComponents: [HomeComponent],
   providers: [AuthService, AuthGuard,UserService, HelpService],

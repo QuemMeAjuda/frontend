@@ -19,6 +19,7 @@ export class HelpDetailsComponent implements OnInit {
   help: any;
   commentWithPhoto = false;
   disabled = false;
+  answerPhotoURL: String;
   @Input() receivedHelp: any;
   @Input() isTimeline: boolean;
 
@@ -37,23 +38,33 @@ export class HelpDetailsComponent implements OnInit {
     this.router.navigate(['/help_details/' + id]);
   }
 
-  addAnswer(currentAnswer){
-    const answer = {
-      author : this.user.info.name,
-      answer: currentAnswer,
-      uid : this.user.info.uid,
-      id : "a",
-      aid: this.help.answers.length
+  createAnswer() {
+    return {
+      author: {
+        name: this.user.info.name,
+        uid: this.user.info.uid,
+        photoURL: this.user.info.photoURL
+      },
+      answer: this.currentAnswer,
+      photoURL: this.answerPhotoURL,
     }
-    answer.id = answer.answer + answer.uid;
+  }
+
+  addAnswer(){
+    const answer = this.createAnswer();
     this.help.answers.push(answer);
     this.currentAnswer = "";
-    
+    this.answerPhotoURL = "";
+    this.commentWithPhoto = false;
   }
 
   //Quando a resposta vir do backend, mudar logica para excluir a resposta com o determinado
   deleteAwnser(aid){
     this.help.answers.splice(aid,1);
+  }
+
+  receivePhotoURL(answerPhotoURL) {
+    this.answerPhotoURL = answerPhotoURL;
   }
 
   ngOnInit() {

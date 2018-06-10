@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AngularFireStorage, AngularFireUploadTask } from 'angularfire2/storage';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { tap, finalize } from 'rxjs/operators';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-upload',
@@ -24,6 +25,8 @@ export class UploadComponent {
   // State for dropzone CSS toggling
   isHovering: boolean;
 
+  @Output() endURL = new EventEmitter<String>();
+
   constructor(
     private storage: AngularFireStorage,
     private db: AngularFirestore
@@ -39,7 +42,7 @@ export class UploadComponent {
 
     // Client-side validation
     if (file.type.split('/')[0] !== 'image') {
-      console.error('unsupported file type :( ');
+      console.error('Apenas arquivos de imagem são suportados :( ');
       return;
     }
 
@@ -62,7 +65,12 @@ export class UploadComponent {
         }
       }),
        // The file's download URL
-      finalize(() => this.downloadURL = this.storage.ref(path).getDownloadURL() )
+      finalize(() => {
+        this.downloadURL = this.storage.ref(path).getDownloadURL();
+        this.storage.ref(path).getDownloadURL().subscribe(
+          url => this.endURL.emit(url)
+        );
+      })
     );
   }
 
