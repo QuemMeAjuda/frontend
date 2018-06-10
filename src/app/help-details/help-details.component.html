@@ -19,39 +19,55 @@
           </p>
         </mat-card-content>
         <div *ngIf="!isTimeline">
-        <p>
+        <p *ngIf="help.answers.length !== 0">
             Respostas:
         </p>
-        <h4 *ngIf="help.answers.length === 0" >Sem respostas até o momento =(</h4>
-        <div *ngFor="let answer of help.answers" layout="column" style="margin-bottom: 15px;">
+        <div *ngFor="let answer of help.answers; let i = index" layout="column" style="margin-bottom: 15px;">
           <div style="margin-top: 10px; right: 0;">
             <div>
               <mat-card>
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image2"></div>
-                  <mat-card-title style="margin-top: 10px">{{answer.author}} respondeu:</mat-card-title>
+                  <mat-card-title style="margin-top: 10px"><b>{{answer.author.name}}</b> respondeu:</mat-card-title>
                 </mat-card-header>
-                <mat-card-content>
-                  <p style="margin-top: 10px">
+                <mat-card-content style="margin-top: 15px">
+                  <div *ngIf="answer.photoURL" flex>
+                    <img style="margin-top: 25px; margin: 0 5 0 5" class="mat-card-image" [src]="answer.photoURL"/>
+                  </div>
+
+                  <p class="mat-card-content" *ngIf="!answer.photoURL" style="white-space: pre-line;  word-wrap: break-word;">
                     {{answer.answer}}
                   </p>
                 </mat-card-content>
-              <button *ngIf="user.info.uid == answer.uid" mat-button style="float: right" (click)="deleteAwnser(answer.aid)">
-                <mat-icon style="padding-bottom: 19px">delete</mat-icon></button>
+                <mat-card-actions>
+                  <button style="margin-left: 90%; margin-top: 15px;" *ngIf="user.info.uid == answer.author.uid"
+                    mat-button class="mat-icon-button" (click)="deleteAwnser(i)">
+                    <mat-icon title="Excluir">delete</mat-icon>
+                  </button>
+                </mat-card-actions>
               </mat-card>
           </div>
           </div>
         </div>
       </div>
-      <form *ngIf="!isTimeline" class="answer-class">
+      <form *ngIf="!isTimeline && !commentWithPhoto" class="answer-class">
         <mat-form-field class="answer-class-width">
           <textarea name="answer" matInput placeholder="Deixe sua resposta" [(ngModel)]="currentAnswer"></textarea>
         </mat-form-field>
       </form>
+      <app-upload *ngIf="!isTimeline && commentWithPhoto" (endURL)="receivePhotoURL($event)">Teste</app-upload>
         <mat-card-actions>
           <button *ngIf="isTimeline" mat-button (click)="goToHelp(help.id)">Ir para ajuda</button>
-          <button *ngIf="!isTimeline && user.isTutor()" mat-button (click)="addanswer(currentAnswer)"
-          style="background-color: rgb(27, 104, 155); color: white;"><mat-icon style="padding-right: 3px">send</mat-icon>Responder</button>
+          <mat-slide-toggle *ngIf="!isTimeline" style="margin-left: 5%;"
+            color="primary"
+            [(ngModel)]="commentWithPhoto"
+            [disabled]="disabled">
+            Responder com imagem
+          </mat-slide-toggle>
+          <button *ngIf="!isTimeline && user.isTutor()" mat-button
+          [disabled]="(!commentWithPhoto && !currentAnswer) || (commentWithPhoto && !answerPhotoURL)" (click)="addAnswer()"
+          style="background-color: rgb(27, 104, 155); color: white; margin-left: 65%;">
+          <mat-icon style="padding-right: 3px">send</mat-icon>Responder</button>
         </mat-card-actions>
       </mat-card>
   </div>

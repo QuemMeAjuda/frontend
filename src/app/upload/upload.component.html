@@ -1,0 +1,29 @@
+<div class="dropzone" dropZone (hovered)="toggleHover($event)" (dropped)="startUpload($event)" [class.hovering]="isHovering">
+  <div class="button-row">
+    <button mat-button (click)="imgFileInput.click()">
+      <mat-icon>attachment</mat-icon>
+      Escolher arquivo
+    </button>
+    <input hidden type="file" #imgFileInput (change)="startUpload($event.target.files)"/>
+  </div>    
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fa fa-upload"></i>
+        </span>
+      </span>
+</div>
+<div *ngIf="percentage | async as pct">
+  <progress class="progress is-info" [value]="pct" max="100">
+  </progress>
+  {{ pct | number }}%
+</div>
+<div *ngIf="(snapshot | async) as snap">
+  {{ snap.bytesTransferred | fileSize }} of {{ snap.totalBytes | fileSize }}
+  <div *ngIf="downloadURL | async as url">
+    <a [href]="url" target="_blank" rel="noopener">
+      <img [src]="url">
+    </a>
+    <br>
+  </div>
+  <hr>
+</div>
