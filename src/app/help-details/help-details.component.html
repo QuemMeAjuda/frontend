@@ -50,7 +50,7 @@
           </div>
         </div>
       </div>
-      <form *ngIf="!isTimeline && !commentWithPhoto" class="answer-class">
+      <form *ngIf="!isTimeline && !commentWithPhoto && user.isTutor()" class="answer-class">
         <mat-form-field class="answer-class-width">
           <textarea name="answer" matInput placeholder="Deixe sua resposta" [(ngModel)]="currentAnswer"></textarea>
         </mat-form-field>
@@ -58,7 +58,7 @@
       <app-upload *ngIf="!isTimeline && commentWithPhoto" (endURL)="receivePhotoURL($event)">Teste</app-upload>
         <mat-card-actions>
           <button *ngIf="isTimeline" mat-button (click)="goToHelp(help.id)">Ir para ajuda</button>
-          <mat-slide-toggle *ngIf="!isTimeline" style="margin-left: 5%;"
+          <mat-slide-toggle *ngIf="!isTimeline && user.isTutor()" style="margin-left: 5%;"
             color="primary"
             [(ngModel)]="commentWithPhoto"
             [disabled]="disabled">

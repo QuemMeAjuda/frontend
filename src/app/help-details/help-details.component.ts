@@ -58,7 +58,7 @@ export class HelpDetailsComponent implements OnInit {
     this.commentWithPhoto = false;
   }
 
-  //Quando a resposta vir do backend, mudar logica para excluir a resposta com o determinado
+  //Quando a resposta vir do backend, mudar logica para excluir a resposta com o determinado id
   deleteAwnser(aid){
     this.help.answers.splice(aid,1);
   }

@@ -9,7 +9,7 @@ export class User {
         this.info = {};
         
         //para fins de teste, use o email que voce esta logado para logar como tutor (competencies > 0)
-        if (data.email === "tiagoleonhart@gmail.com"){
+        if (data.email === "rubensbbatista@gmail.com"){
             data.competencies = ["p1","LEDA","ATAL"];
         }
         _.extend(this.info, data);
