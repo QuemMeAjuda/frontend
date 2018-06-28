@@ -109,6 +109,20 @@ export class HelpService {
         //return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
     }
 
+    //Para ajudas mocadas (fins de testes, apagar quando integrar com o back)
+    private getIndexHelp(id){
+        let i = 0;
+        while(i < this.helps.length && this.helps[i].id !== id){
+            i+=1;
+        }
+        return i;
+    }
+
+    deleteHelp(id){
+        const index = this.getIndexHelp(id);
+        this.helps.splice(index,1);
+    }
+
     constructor(private http :HttpClient) {
         this.id = 3;
         const help = this.helps[0];

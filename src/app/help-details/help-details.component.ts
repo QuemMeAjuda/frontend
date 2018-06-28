@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Rx';
 import { HelpService } from '../service/help.service';
 import { AuthService } from '../service/auth.service';
 import { User } from '../auth/user';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-help-details',
@@ -26,6 +27,7 @@ export class HelpDetailsComponent implements OnInit {
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
       private helpService: HelpService,
+      private homeComponent : HomeComponent,
       private auth: AuthService) {
     this.user = this.auth.getCurrentUser();
     this.help = {
@@ -59,12 +61,18 @@ export class HelpDetailsComponent implements OnInit {
   }
 
   //Quando a resposta vir do backend, mudar logica para excluir a resposta com o determinado id
-  deleteAwnser(aid){
+  deleteAnswer(aid){
     this.help.answers.splice(aid,1);
   }
 
   receivePhotoURL(answerPhotoURL) {
     this.answerPhotoURL = answerPhotoURL;
+  }
+
+  deleteHelp(id){
+    const index = this.helpService.deleteHelp(id);
+    this.homeComponent.goToHome();
+
   }
 
   ngOnInit() {
