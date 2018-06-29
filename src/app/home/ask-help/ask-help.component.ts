@@ -18,10 +18,16 @@ export class AskHelpComponent implements OnInit {
       author: this.authService.getCurrentUser().info['name'],
       generalDescription: shortDesc,
       detailedDescription: longDesc,
-      tags: tags.split(' ')
+      tags: tags.split(' '),
+      uid: this.authService.getCurrentUser().info['uid'],
+      answers: []
     }
-    this.helpService.addHelp({ajuda:help, alunoID: this.authService.getCurrentUser().info['uid']})
-      .subscribe(res=>console.log(res), err=> console.log(err));
+    //para dados mockados 
+    this.helpService.addHelp(help);
+
+    //this.helpService.addHelp({ajuda:help, alunoID: this.authService.getCurrentUser().info['uid']})
+    //  .subscribe(res=>console.log(res), err=> console.log(err));
+    
   }
 
   isLargerScreen(): boolean {

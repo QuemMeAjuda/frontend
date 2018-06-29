@@ -7,6 +7,13 @@
       <mat-card [ngClass]="isTimeline ? 'fixed-card' : 'example-card'">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
+          <div>
+            <button style="margin-left: 75%;" *ngIf="user.info.uid === help.uid 
+            && !isTimeline && help.answers.length === 0" 
+                    mat-button class="mat-icon-button" (click)="deleteHelp(help.id)">
+                    <mat-icon title="Excluir">delete</mat-icon>
+            </button>
+          </div>
           <mat-card-title>Resumo: {{help.generalDescription}}</mat-card-title>
           <mat-card-subtitle>Autor: {{help.author}}</mat-card-subtitle>
         </mat-card-header>
@@ -41,7 +48,7 @@
                 </mat-card-content>
                 <mat-card-actions>
                   <button style="margin-left: 90%; margin-top: 15px;" *ngIf="user.info.uid == answer.author.uid"
-                    mat-button class="mat-icon-button" (click)="deleteAwnser(i)">
+                    mat-button class="mat-icon-button" (click)="deleteAnswer(i)">
                     <mat-icon title="Excluir">delete</mat-icon>
                   </button>
                 </mat-card-actions>
@@ -50,7 +57,7 @@
           </div>
         </div>
       </div>
-      <form *ngIf="!isTimeline && !commentWithPhoto" class="answer-class">
+      <form *ngIf="!isTimeline && !commentWithPhoto && (user.isTutor() || user.info.uid === help.uid)" class="answer-class">
         <mat-form-field class="answer-class-width">
           <textarea name="answer" matInput placeholder="Deixe sua resposta" [(ngModel)]="currentAnswer"></textarea>
         </mat-form-field>
@@ -58,13 +65,13 @@
       <app-upload *ngIf="!isTimeline && commentWithPhoto" (endURL)="receivePhotoURL($event)">Teste</app-upload>
         <mat-card-actions>
           <button *ngIf="isTimeline" mat-button (click)="goToHelp(help.id)">Ir para ajuda</button>
-          <mat-slide-toggle *ngIf="!isTimeline" style="margin-left: 5%;"
+          <mat-slide-toggle *ngIf="!isTimeline && (user.isTutor() || user.info.uid === help.uid)" style="margin-left: 5%;"
             color="primary"
             [(ngModel)]="commentWithPhoto"
             [disabled]="disabled">
             Responder com imagem
           </mat-slide-toggle>
-          <button *ngIf="!isTimeline && user.isTutor()" mat-button
+          <button *ngIf="!isTimeline && (user.isTutor() || user.info.uid === help.uid)" mat-button
           [disabled]="(!commentWithPhoto && !currentAnswer) || (commentWithPhoto && !answerPhotoURL)" (click)="addAnswer()"
           style="background-color: rgb(27, 104, 155); color: white; margin-left: 65%;">
           <mat-icon style="padding-right: 3px">send</mat-icon>Responder</button>

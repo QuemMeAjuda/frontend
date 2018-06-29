@@ -7,6 +7,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class HelpService {
 
+    id : any;
     url = Utils.urlBase;
 
     // TODO: delete when the backend work
@@ -90,8 +91,17 @@ export class HelpService {
         return this.http.get(`${this.url}/user/getAjudasByAluno/${id}`);
     }
 
+    /*
     addHelp(help): Observable<any> {
         return this.http.post(`${this.url}/ajuda/postAjuda`, help);
+    }
+    */
+
+    addHelp(help){
+        help.id = this.id;
+        this.id+=1;
+        this.helps.push(help);
+        console.log(this.helps);
     }
 
     getHelp(id){
@@ -99,15 +109,29 @@ export class HelpService {
         //return this.http.get(this.url+`/ajuda/getAjuda/${id}`);
     }
 
+    //Para ajudas mocadas (fins de testes, apagar quando integrar com o back)
+    private getIndexHelp(id){
+        let i = 0;
+        while(i < this.helps.length && this.helps[i].id !== id){
+            i+=1;
+        }
+        return i;
+    }
+
+    deleteHelp(id){
+        const index = this.getIndexHelp(id);
+        this.helps.splice(index,1);
+    }
+
     constructor(private http :HttpClient) {
-        let id = 3;
+        this.id = 3;
         const help = this.helps[0];
         for(var i = 0; i < 50; i++) {
             var x = _.cloneDeep(help);
             x.generalDescription += "-" + String(i+1);
-            x.id = id
+            x.id = this.id;
             this.helps.push(x);
-            id+=1;
+            this.id+=1;
         }
         this.helps = this.helps.filter(h => h.answers.map(x => {x.uid = "indefinido";x.aid = -1}));
     }
