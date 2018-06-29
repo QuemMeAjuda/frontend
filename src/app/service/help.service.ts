@@ -100,7 +100,7 @@ export class HelpService {
     addHelp(help){
         help.id = this.id;
         this.id+=1;
-        this.helps.unshift(help);
+        this.helps.push(help);
         console.log(this.helps);
     }
 

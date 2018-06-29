@@ -19,11 +19,12 @@ export class AskHelpComponent implements OnInit {
       generalDescription: shortDesc,
       detailedDescription: longDesc,
       tags: tags.split(' '),
+      uid: this.authService.getCurrentUser().info['uid'],
       answers: []
     }
     //para dados mockados 
-    this.helpService.addHelp(help)
-    
+    this.helpService.addHelp(help);
+
     //this.helpService.addHelp({ajuda:help, alunoID: this.authService.getCurrentUser().info['uid']})
     //  .subscribe(res=>console.log(res), err=> console.log(err));
     
