@@ -7,17 +7,12 @@ export class User {
     constructor(data: any) {
 
         this.info = {};
-        
-        //para fins de teste, use o email que voce esta logado para logar como tutor (competencies > 0)
-        if (data.email === "rubeaaans.sousa@ccc.ufcg.edu.br"){
-            data.competencies = ["p1","LEDA","ATAL"];
-        }
         _.extend(this.info, data);
 
     }
 
     isTutor(){
-        return this.info.competencies && this.info.competencies.length > 0;
+        return this.info.skills && this.info.skills.length > 0;
     }
 
 }
