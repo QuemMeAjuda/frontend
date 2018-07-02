@@ -49,14 +49,15 @@ export class AuthService {
   }
 
   getUser(data) {
-    this.userService.getUser(data.uid).subscribe(res=> {
+    this.userService.getUserByEmail(data.email).subscribe(res=> {
       if(res['data'].length == 0){
-        this.userService.postUser(data).subscribe(res=>res, err=> err);
+        this.userService.postUser(data).subscribe(res=>this.getUser(data), err=> err);
       }else{
-        _.extend(data, res['data']);
+        _.extend(data, res['data'][0]);
+        this.userInfo$ = new User(data);
+        localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
       }
     }, err => err);
-    return data;
   }
 
   updateUser(credential) {
@@ -67,9 +68,7 @@ export class AuthService {
       photoURL: credential.user.photoURL,
       uid: credential.user.uid
     };
-    data = this.getUser(data);
-    this.userInfo$ = new User(data);
-    localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
+    this.getUser(data);
   }
 
   getCurrentUser() {

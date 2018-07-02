@@ -13,6 +13,7 @@ import {SignupComponent} from "./signup/signup.component";
 import { HelpDetailsComponent } from './help-details/help-details.component';
 import {TutorRegisterComponent} from "./tutor-register/tutor-register.component";
 import { TimelineComponent } from './home/timeline/timeline.component';
+import { MockSystemComponent } from './mock-system/mock-system.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home/0', pathMatch: 'full' },
@@ -24,7 +25,8 @@ const childRoutes: Routes = [
         { path: 'home/:page', component: TimelineComponent },
         { path: 'help_details/:id', component: HelpDetailsComponent },
         { path: 'ask_for_help', component: AskHelpComponent },
-        { path: 'welcome', component: WelcomeComponent }
+        { path: 'welcome/:authorID', component: WelcomeComponent },
+        { path: 'admin/reset', component: MockSystemComponent }
     ] },
     // TODO: make NOT FOUND page to redirect
     { path: '**', redirectTo: '/home/0'}
@@ -32,7 +34,7 @@ const childRoutes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes),
+  RouterModule.forRoot(appRoutes),
     RouterModule.forChild(childRoutes)
   ],
   exports: [RouterModule]

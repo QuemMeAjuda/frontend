@@ -36,7 +36,8 @@ export class HelpDetailsComponent implements OnInit {
     };
   }
 
-  goToHelp(id: any) {
+  goToHelp(help: any) {
+    let id = help && help._id;
     this.router.navigate(['/help_details/' + id]);
   }
 
@@ -44,35 +45,49 @@ export class HelpDetailsComponent implements OnInit {
     return {
       author: {
         name: this.user.info.name,
-        uid: this.user.info.uid,
-        photoURL: this.user.info.photoURL
+        photoURL: this.user.info.photoURL,
+        email: this.user.info.email,
+        _id: this.user.info._id,
+        tutorEvaluation: this.user.info.tutorEvaluation,
+        studentEvaluation: this.user.info.studentEvaluation
       },
       answer: this.currentAnswer,
       photoURL: this.answerPhotoURL,
     }
   }
 
-  addAnswer(){
+  addAnswer(help){
+    let id = help && help._id;
     const answer = this.createAnswer();
-    this.help.answers.push(answer);
-    this.currentAnswer = "";
-    this.answerPhotoURL = "";
-    this.commentWithPhoto = false;
+    this.helpService.addAnswer(id, answer).subscribe(res=> {
+      this.help.answers.push(answer);
+      this.currentAnswer = "";
+      this.answerPhotoURL = "";
+      this.commentWithPhoto = false;
+    }, err=> console.log(err));
   }
 
-  //Quando a resposta vir do backend, mudar logica para excluir a resposta com o determinado id
-  deleteAnswer(aid){
-    this.help.answers.splice(aid,1);
+  deleteAnswer(help, index){
+    let id = help && help._id;
+    this.helpService.deleteAnswer(id, index).subscribe(res=> {
+      this.help.answers.splice(index,1);
+    }, err=> console.log(err));
   }
 
   receivePhotoURL(answerPhotoURL) {
     this.answerPhotoURL = answerPhotoURL;
   }
 
-  deleteHelp(id){
-    const index = this.helpService.deleteHelp(id);
-    this.homeComponent.goToHome();
+  deleteHelp(help: any){
+    let id = help && help._id;
+    this.helpService.deleteHelp(id).subscribe(res=> {
+      this.homeComponent.goToHome();
+    }, err=> console.log(err));
+  }
 
+  getUrl(obj) {
+    const url = obj.author && obj.author.photoURL || 'https://img.meutimao.com.br/_upload/forumtopico/2017/03/13/qeqv9vj.png';
+    return `url(${url})`;
   }
 
   ngOnInit() {
@@ -82,8 +97,9 @@ export class HelpDetailsComponent implements OnInit {
       this.watcher = this.routeAct.params.subscribe(
         (params: any) => {
           this.id = params['id'];
-          this.help = this.helpService.getHelp(this.id);
-          //this.helpService.getHelp(this.id).subscribe(res=> this.help = res['data'], err=> console.log(err));
+          this.helpService.getHelp(this.id).subscribe(res=> {
+            this.help = res['data'];
+          }, err=> console.log(err));
         }
       );
     }
