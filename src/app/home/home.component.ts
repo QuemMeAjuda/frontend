@@ -47,6 +47,12 @@ export class HomeComponent {
       return 'logo-for-small';
     }
   }
+
+  getUrl(obj) {
+    const url = obj.info && obj.info.photoURL || 'https://img.meutimao.com.br/_upload/forumtopico/2017/03/13/qeqv9vj.png';
+    return url;
+  }
+
   ngOnDestroy(): void {
     this.mobileQuery.removeListener(this._mobileQueryListener);
   }

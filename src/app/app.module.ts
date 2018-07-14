@@ -33,6 +33,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MockSystemComponent } from './mock-system/mock-system.component';
+import { BottomSheetOverviewExampleSheet } from './help-details/help-details.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { MockSystemComponent } from './mock-system/mock-system.component';
     DropZoneDirective,
     FileSizePipe,
     MockSystemComponent,
+    BottomSheetOverviewExampleSheet
   ],
   imports: [
   BrowserModule,
@@ -65,7 +67,7 @@ import { MockSystemComponent } from './mock-system/mock-system.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
   ],
-  entryComponents: [HomeComponent],
+  entryComponents: [HomeComponent, BottomSheetOverviewExampleSheet],
   providers: [AuthService, AuthGuard,UserService, HelpService],
   bootstrap: [AppComponent]
 })
