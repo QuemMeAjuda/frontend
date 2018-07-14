@@ -5,6 +5,7 @@ import { HelpService } from '../service/help.service';
 import { AuthService } from '../service/auth.service';
 import { User } from '../auth/user';
 import { HomeComponent } from '../home/home.component';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 @Component({
   selector: 'app-help-details',
@@ -28,7 +29,8 @@ export class HelpDetailsComponent implements OnInit {
       private router: Router,
       private helpService: HelpService,
       private homeComponent : HomeComponent,
-      private auth: AuthService) {
+      private auth: AuthService,
+      private bottomSheet: MatBottomSheet) {
     this.user = this.auth.getCurrentUser();
     this.help = {
       detailedDescription:"",
@@ -85,9 +87,20 @@ export class HelpDetailsComponent implements OnInit {
     }, err=> console.log(err));
   }
 
+  closeHelp(help: any) {
+    let id = help && help._id;
+    this.helpService.closeHelp(id).subscribe(res=> {
+      help.closed = true;
+    }, err=> console.log(err));
+  }
+
   getUrl(obj) {
     const url = obj.author && obj.author.photoURL || 'https://img.meutimao.com.br/_upload/forumtopico/2017/03/13/qeqv9vj.png';
     return `url(${url})`;
+  }
+
+  openBottomSheet(): void {
+    this.bottomSheet.open(BottomSheetOverviewExampleSheet);
   }
 
   ngOnInit() {
@@ -109,5 +122,20 @@ export class HelpDetailsComponent implements OnInit {
     if (this.watcher) {
       this.watcher.unsubscribe();
     }
+  }
+
+
+}
+
+@Component({
+  selector: 'bottom-sheet-overview-example-sheet',
+  templateUrl: 'bottom-sheet-overview-example-sheet.html',
+})
+export class BottomSheetOverviewExampleSheet {
+  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>) {}
+
+  openLink(event: MouseEvent): void {
+    this.bottomSheetRef.dismiss();
+    event.preventDefault();
   }
 }

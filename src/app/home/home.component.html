@@ -12,7 +12,7 @@
         <div layout="row" style="width: 15em;">
           <div>
             <div class="center" style="margin-top: 1em">
-                <img style="border-radius: 50%; height: 7em;" [src]="user.info.photoURL"/>
+                <img style="border-radius: 50%; height: 7em;" [src]="getUrl(user)"/>
             </div>
             <div class="center" style="margin-top: 1em">
                 <b>{{user.info && user.info.name}}</b>

@@ -5,14 +5,29 @@
   <div style="margin-top: 25px; right: 0;">
     <div class="center">
       <mat-card [ngClass]="isTimeline ? 'fixed-card' : 'example-card'">
+        <div *ngIf="help.closed" style="margin-bottom: 20px;" class="closed-help">RESOLVIDO</div>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': getUrl(help)}"></div>
-          <div>
-            <button style="margin-left: 75%;" *ngIf="user.info._id === help.authorID 
-            && !isTimeline && help.answers.length === 0" 
-                    mat-button class="mat-icon-button" (click)="deleteHelp(help)">
-                    <mat-icon title="Excluir">delete</mat-icon>
-            </button>
+          <div style="margin-left: 50%" layout="end end">
+              <div class="dropdown" 
+              *ngIf="!isTimeline">
+                  <span>
+                    <button style="margin-right: -75%" mat-button class="mat-icon-button" (click)="null">
+                      <mat-icon title="Opções">more_vert</mat-icon>
+                    </button>
+                  </span>
+                  <div class="dropdown-content">
+                    <button *ngIf="user.info._id === help.authorID" 
+                            mat-button (click)="deleteHelp(help)">
+                            Excluir pedido de ajuda
+                    </button>
+                    <button *ngIf="user.info._id === help.authorID 
+                    && help.answers.length > 0 && !help.closed" 
+                            mat-button (click)="closeHelp(help)">
+                            Marcar como resolvido
+                    </button>
+                  </div>
+                </div>
           </div>
           <mat-card-title>Resumo: {{help.generalDescription}}</mat-card-title>
           <mat-card-subtitle>Autor: {{help.author && help.author.name}}</mat-card-subtitle>
@@ -48,7 +63,7 @@
                   </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button style="margin-left: 90%; margin-top: 15px;" *ngIf="user.info._id === help.authorID"
+                  <button style="margin-left: 90%; margin-top: 15px;" *ngIf="!help.closed && user.info._id === help.authorID"
                     mat-button class="mat-icon-button" (click)="deleteAnswer(help, i)">
                     <mat-icon title="Excluir">delete</mat-icon>
                   </button>
@@ -58,21 +73,21 @@
           </div>
         </div>
       </div>
-      <form *ngIf="!isTimeline && !commentWithPhoto && (user.isTutor() || user.info._id === help.authorID)" class="answer-class">
+      <form *ngIf="!help.closed && !isTimeline && !commentWithPhoto && (user.isTutor() || user.info._id === help.authorID)" class="answer-class">
         <mat-form-field class="answer-class-width">
           <textarea name="answer" matInput placeholder="Deixe sua resposta" [(ngModel)]="currentAnswer"></textarea>
         </mat-form-field>
       </form>
-      <app-upload *ngIf="!isTimeline && commentWithPhoto" (endURL)="receivePhotoURL($event)">Teste</app-upload>
+      <app-upload *ngIf="!help.closed && !isTimeline && commentWithPhoto" (endURL)="receivePhotoURL($event)">Teste</app-upload>
         <mat-card-actions>
           <button *ngIf="isTimeline" mat-button (click)="goToHelp(help)">Ir para ajuda</button>
-          <mat-slide-toggle *ngIf="!isTimeline && (user.isTutor() || user.info._id === help.authorID)" style="margin-left: 5%;"
+          <mat-slide-toggle *ngIf="!help.closed && !isTimeline && (user.isTutor() || user.info._id === help.authorID)" style="margin-left: 5%;"
             color="primary"
             [(ngModel)]="commentWithPhoto"
             [disabled]="disabled">
             Responder com imagem
           </mat-slide-toggle>
-          <button *ngIf="!isTimeline && (user.isTutor() || user.info._id === help.authorID)" mat-button
+          <button *ngIf="!help.closed && !isTimeline && (user.isTutor() || user.info._id === help.authorID)" mat-button
           [disabled]="(!commentWithPhoto && !currentAnswer) || (commentWithPhoto && !answerPhotoURL)" (click)="addAnswer(help)"
           style="background-color: rgb(27, 104, 155); color: white; margin-left: 65%;">
           <mat-icon style="padding-right: 3px">send</mat-icon>Responder</button>
