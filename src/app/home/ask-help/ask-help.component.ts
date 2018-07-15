@@ -35,11 +35,14 @@ export class AskHelpComponent implements OnInit {
       }
   }
   sendOrder(shortDesc: string, longDesc: string, tags: string): any {
-    let help = this.createHelp(shortDesc, longDesc, tags);
-    this.helpService.createHelpOrder(help).subscribe(res => {
-      this.router.navigate(['home/0']);
-    }, err => console.log(err)
-    ); 
+    if(shortDesc && longDesc && tags){
+      let help = this.createHelp(shortDesc, longDesc, tags);
+      this.helpService.createHelpOrder(help).subscribe(res => {
+        this.router.navigate(['home/0']);
+      }, err => console.log(err)
+      ); 
+    }
+    
   }
 
   isLargerScreen(): boolean {

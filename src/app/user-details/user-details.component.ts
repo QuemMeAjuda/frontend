@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../service/user.service';
 import { User } from '../auth/user';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-details',
@@ -17,7 +17,8 @@ export class UserDetailsComponent implements OnInit {
   watcher: Subscription;
 
   constructor(private userService: UserService,
-    private routeAct: ActivatedRoute) {
+    private routeAct: ActivatedRoute,
+    private router: Router) {
    }
 
 
@@ -27,11 +28,11 @@ export class UserDetailsComponent implements OnInit {
   }
 
   getRate(): any{
-    let total = this.currentUser.evaluation.reduce((a,b) => {
+    let total = this.currentUser && this.currentUser.evaluation.reduce((a,b) => {
       a+=b.rating;
       return a;
     },0);
-    return (total / this.currentUser.evaluation.length) || "Não avaliado ainda";
+    return (total / (this.currentUser && this.currentUser.evaluation.length)) || "Não avaliado ainda";
   }
 
   ngOnInit() {
@@ -43,6 +44,15 @@ export class UserDetailsComponent implements OnInit {
         }, err=> console.log(err));
       }
     );
+  }
+
+  getEvalUrl(author){
+    const url = author && author.photoURL || 'https://cdn.mytheatreland.com/images/show/25951_show_landscape_large_01.jpg';
+    return `url(${url})`;
+  }
+
+  goToUserPage(id){
+    this.router.navigate(['/user_details', id]);
   }
 
   ngOnDestroy(){

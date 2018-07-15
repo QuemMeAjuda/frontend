@@ -68,4 +68,8 @@ export class HomeComponent {
   logout(): void {
     this.auth.logout();
   }
+
+  goToMyProfile(){
+    this.router.navigate(['/user_details', this.user.info._id]);
+  }
 }
