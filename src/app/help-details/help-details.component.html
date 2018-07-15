@@ -10,7 +10,7 @@
           <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': getUrl(help)}"></div>
           <div style="margin-left: 50%" layout="end end">
               <div class="dropdown" 
-              *ngIf="!isTimeline">
+              *ngIf="!isTimeline && user.info._id === help.authorID">
                   <span>
                     <button style="margin-right: -75%" mat-button class="mat-icon-button" (click)="null">
                       <mat-icon title="Opções">more_vert</mat-icon>
@@ -30,7 +30,7 @@
                 </div>
           </div>
           <mat-card-title>Resumo: {{help.generalDescription}}</mat-card-title>
-          <mat-card-subtitle>Autor: {{help.author && help.author.name}}</mat-card-subtitle>
+          <button mat-button (click)="goToUserPage(help.authorID)"><mat-card-subtitle>Autor: {{help.author && help.author.name}}</mat-card-subtitle></button>
         </mat-card-header>
         <mat-card-content>
           <p>

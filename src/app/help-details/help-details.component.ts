@@ -58,6 +58,10 @@ export class HelpDetailsComponent implements OnInit {
     }
   }
 
+  goToUserPage(authorID){
+    this.router.navigate(['/user_details', authorID]);
+  }
+
   addAnswer(help){
     let id = help && help._id;
     const answer = this.createAnswer();

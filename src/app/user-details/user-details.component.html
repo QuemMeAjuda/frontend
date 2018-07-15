@@ -1,0 +1,18 @@
+<div>
+  <mat-card>
+      <mat-card-header>
+        <div layout="row" style="margin: auto">
+          <div mat-card-avatar class="example-header-image center" 
+          [ngStyle]="{'background-image': getUrl()}" style="width: 200px; height: 200px"></div>
+          <p class="userText"><b>Usuario: </b>{{currentUser && currentUser.name}}</p>
+          <p class="userText"><b>Email: </b>{{currentUser && currentUser.email}}</p>
+          <p class="userText"><b>Média: </b>{{getRate()}}</p>
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card>
+
+        </mat-card>
+      </mat-card-content>
+  </mat-card>
+</div>
