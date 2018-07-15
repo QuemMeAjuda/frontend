@@ -1,11 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { HelpService } from '../service/help.service';
 import { AuthService } from '../service/auth.service';
 import { User } from '../auth/user';
 import { HomeComponent } from '../home/home.component';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
 
 @Component({
   selector: 'app-help-details',
@@ -24,13 +23,15 @@ export class HelpDetailsComponent implements OnInit {
   answerPhotoURL: String;
   @Input() receivedHelp: any;
   @Input() isTimeline: boolean;
-
+  animal: string;
+  name: string;
+  
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
       private helpService: HelpService,
       private homeComponent : HomeComponent,
       private auth: AuthService,
-      private bottomSheet: MatBottomSheet) {
+      private dialog: MatDialog) {
     this.user = this.auth.getCurrentUser();
     this.help = {
       detailedDescription:"",
@@ -99,8 +100,16 @@ export class HelpDetailsComponent implements OnInit {
     return `url(${url})`;
   }
 
-  openBottomSheet(): void {
-    this.bottomSheet.open(BottomSheetOverviewExampleSheet);
+  openDialog(): void {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
   }
 
   ngOnInit() {
@@ -127,15 +136,25 @@ export class HelpDetailsComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'bottom-sheet-overview-example-sheet',
-  templateUrl: 'bottom-sheet-overview-example-sheet.html',
-})
-export class BottomSheetOverviewExampleSheet {
-  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>) {}
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
+export interface DialogData {
+  animal: string;
+  name: string;
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
+
 }
