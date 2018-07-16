@@ -48,5 +48,9 @@ export class HelpService {
         return this.http.put(`${this.url}/ajuda/putAnswer/${id}`, answer);
     }
 
+    favoriteAnswer(id, index: any): Observable<any> {
+        return this.http.put(`${this.url}/ajuda/favoriteAnswer/${id}`, index);
+    }
+
     constructor(private http :HttpClient) {}
 }

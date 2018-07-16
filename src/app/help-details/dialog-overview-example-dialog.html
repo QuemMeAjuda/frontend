@@ -1,11 +1,15 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
+<h1 mat-dialog-title>Avaliar resposta</h1>
 <div mat-dialog-content>
-  <p>What's your favorite animal?</p>
+  <p>Ao avaliar uma resposta ela será a melhor resposta e você não poderar avaliar outra.</p>
+  <div style="margin-left: 20%">
+    <bar-rating [(rate)]="data.evaluation.rating" [max]="5"></bar-rating>
+  </div>
+  <p>Deixe um comentário!</p>
   <mat-form-field>
-    <input matInput [(ngModel)]="data.animal">
+    <input matInput [(ngModel)]="data.evaluation.comment">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data.evaluation" cdkFocusInitial>Finalizar</button>
 </div>

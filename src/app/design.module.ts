@@ -50,6 +50,8 @@ import {
   MatTreeModule,
 } from '@angular/material';
 
+import { BarRatingModule } from "ngx-bar-rating";
+
 @NgModule({
   imports: [
     FormsModule,
@@ -90,7 +92,8 @@ import {
     MatTabsModule,
     MatTooltipModule,
     MatTreeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BarRatingModule
   ],
   exports: [
     FormsModule,
@@ -140,7 +143,8 @@ import {
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BarRatingModule
   ],
   declarations: []
 })

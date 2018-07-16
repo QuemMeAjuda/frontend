@@ -18,6 +18,10 @@ export class UserService {
     return this.http.get(`${this.url}/user/getUserByEmail/${id}`);
   }
 
+  getUserByID(id): Observable<any> {
+    return this.http.get(`${this.url}/user/getUser/${id}`);
+  }
+
   postUser(user): Observable<any>{
     let data = {
       name: user.name,
@@ -27,5 +31,9 @@ export class UserService {
     };
 
     return this.http.post(`${this.url}/user/postUser`, data);
+  }
+
+  addEvaluation(id, evaluation: any): Observable<any> {
+    return this.http.put(`${this.url}/user/updateAvaliacaoTutor/${id}`, evaluation)
   }
 }

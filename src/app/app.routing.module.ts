@@ -14,6 +14,7 @@ import { HelpDetailsComponent } from './help-details/help-details.component';
 import {TutorRegisterComponent} from "./tutor-register/tutor-register.component";
 import { TimelineComponent } from './home/timeline/timeline.component';
 import { MockSystemComponent } from './mock-system/mock-system.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home/0', pathMatch: 'full' },
@@ -26,7 +27,8 @@ const childRoutes: Routes = [
         { path: 'help_details/:id', component: HelpDetailsComponent },
         { path: 'ask_for_help', component: AskHelpComponent },
         { path: 'welcome/:authorID', component: WelcomeComponent },
-        { path: 'admin/reset', component: MockSystemComponent }
+        { path: 'admin/reset', component: MockSystemComponent },
+        { path: 'user_details/:id', component: UserDetailsComponent}
     ] },
     // TODO: make NOT FOUND page to redirect
     { path: '**', redirectTo: '/home/0'}

@@ -5,6 +5,8 @@ import { HelpService } from '../service/help.service';
 import { AuthService } from '../service/auth.service';
 import { User } from '../auth/user';
 import { HomeComponent } from '../home/home.component';
+import {MatSnackBar} from '@angular/material';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-help-details',
@@ -23,20 +25,28 @@ export class HelpDetailsComponent implements OnInit {
   answerPhotoURL: String;
   @Input() receivedHelp: any;
   @Input() isTimeline: boolean;
-  animal: string;
-  name: string;
-  
+
+  evaluation: any;
+
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
       private helpService: HelpService,
       private homeComponent : HomeComponent,
       private auth: AuthService,
-      private dialog: MatDialog) {
+      private dialog: MatDialog,
+      private snackBar: MatSnackBar,
+      private userService: UserService) {
     this.user = this.auth.getCurrentUser();
     this.help = {
       detailedDescription:"",
       generalDescription: ""
     };
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
 
   goToHelp(help: any) {
@@ -51,12 +61,15 @@ export class HelpDetailsComponent implements OnInit {
         photoURL: this.user.info.photoURL,
         email: this.user.info.email,
         _id: this.user.info._id,
-        tutorEvaluation: this.user.info.tutorEvaluation,
-        studentEvaluation: this.user.info.studentEvaluation
+        evaluation: this.user.info.evaluation,
       },
       answer: this.currentAnswer,
       photoURL: this.answerPhotoURL,
     }
+  }
+
+  goToUserPage(authorID){
+    this.router.navigate(['/user_details', authorID]);
   }
 
   addAnswer(help){
@@ -92,6 +105,7 @@ export class HelpDetailsComponent implements OnInit {
     let id = help && help._id;
     this.helpService.closeHelp(id).subscribe(res=> {
       help.closed = true;
+      this.openSnackBar("Avalie a melhor resposta!", "Fechar");
     }, err=> console.log(err));
   }
 
@@ -100,15 +114,26 @@ export class HelpDetailsComponent implements OnInit {
     return `url(${url})`;
   }
 
-  openDialog(): void {
+  openDialog(help, index): void {
+    let id = help && help._id;
+    console.log(help, index)
+    let answerAuthorID = help.answers && help.answers[index].authorID;
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {name: this.name, animal: this.animal}
+      data: {evaluation: this.evaluation}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result)
+      if(result && result.rate) {
+        this.userService.addEvaluation(answerAuthorID, result).subscribe(res=> {
+          help.answers[index].favorite = true;
+        }, err=> console.log(err));
+
+        this.helpService.favoriteAnswer(id, index).subscribe(res=> {
+          help.answers[index].favorite = true;
+        }, err=> console.log(err));
+      }
     });
   }
 
@@ -139,8 +164,7 @@ export class HelpDetailsComponent implements OnInit {
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 export interface DialogData {
-  animal: string;
-  name: string;
+  evaluation: any;
 }
 
 @Component({
@@ -151,10 +175,14 @@ export class DialogOverviewExampleDialog {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      this.data.evaluation = {
+        rating: Number,
+        comment: ""
+      };
+    }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
-
 }

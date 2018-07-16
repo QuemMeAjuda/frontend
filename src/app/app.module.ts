@@ -34,6 +34,7 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MockSystemComponent } from './mock-system/mock-system.component';
 import { DialogOverviewExampleDialog } from './help-details/help-details.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { DialogOverviewExampleDialog } from './help-details/help-details.compone
     DropZoneDirective,
     FileSizePipe,
     MockSystemComponent,
-    DialogOverviewExampleDialog
+    DialogOverviewExampleDialog,
+    UserDetailsComponent
   ],
   imports: [
   BrowserModule,
