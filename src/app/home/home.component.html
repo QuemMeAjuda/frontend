@@ -15,7 +15,7 @@
                 <img style="border-radius: 50%; height: 7em;" [src]="getUrl(user)"/>
             </div>
             <div class="center" style="margin-top: 1em">
-                <b>{{user.info && user.info.name}}</b>
+                <b>{{user && user.info && user.info.name}}</b>
             </div>
             <mat-divider style="margin-top: 2em;"></mat-divider>
             <div>

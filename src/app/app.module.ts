@@ -33,7 +33,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MockSystemComponent } from './mock-system/mock-system.component';
-import { BottomSheetOverviewExampleSheet } from './help-details/help-details.component';
+import { DialogOverviewExampleDialog } from './help-details/help-details.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
@@ -52,7 +52,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     DropZoneDirective,
     FileSizePipe,
     MockSystemComponent,
-    BottomSheetOverviewExampleSheet,
+    DialogOverviewExampleDialog,
     UserDetailsComponent
   ],
   imports: [
@@ -69,7 +69,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
   ],
-  entryComponents: [HomeComponent, BottomSheetOverviewExampleSheet],
+  entryComponents: [HomeComponent, DialogOverviewExampleDialog],
   providers: [AuthService, AuthGuard,UserService, HelpService],
   bootstrap: [AppComponent]
 })

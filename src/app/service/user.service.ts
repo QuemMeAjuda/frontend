@@ -32,4 +32,8 @@ export class UserService {
 
     return this.http.post(`${this.url}/user/postUser`, data);
   }
+
+  addEvaluation(id, evaluation: any): Observable<any> {
+    return this.http.put(`${this.url}/user/updateAvaliacaoTutor/${id}`, evaluation)
+  }
 }

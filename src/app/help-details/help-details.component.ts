@@ -1,11 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { HelpService } from '../service/help.service';
 import { AuthService } from '../service/auth.service';
 import { User } from '../auth/user';
 import { HomeComponent } from '../home/home.component';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-help-details',
@@ -30,12 +31,20 @@ export class HelpDetailsComponent implements OnInit {
       private helpService: HelpService,
       private homeComponent : HomeComponent,
       private auth: AuthService,
-      private bottomSheet: MatBottomSheet) {
+      private dialog: MatDialog,
+      private snackBar: MatSnackBar,
+      private userService: UserService) {
     this.user = this.auth.getCurrentUser();
     this.help = {
       detailedDescription:"",
       generalDescription: ""
     };
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000,
+    });
   }
 
   goToHelp(help: any) {
@@ -49,10 +58,8 @@ export class HelpDetailsComponent implements OnInit {
         name: this.user.info.name,
         photoURL: this.user.info.photoURL,
         email: this.user.info.email,
-        _id: this.user.info._id,
-        tutorEvaluation: this.user.info.tutorEvaluation,
-        studentEvaluation: this.user.info.studentEvaluation
       },
+      authorID: this.user.info._id,
       answer: this.currentAnswer,
       photoURL: this.answerPhotoURL,
     }
@@ -95,6 +102,7 @@ export class HelpDetailsComponent implements OnInit {
     let id = help && help._id;
     this.helpService.closeHelp(id).subscribe(res=> {
       help.closed = true;
+      this.openSnackBar("Avalie a melhor resposta!", "Fechar");
     }, err=> console.log(err));
   }
 
@@ -103,8 +111,39 @@ export class HelpDetailsComponent implements OnInit {
     return `url(${url})`;
   }
 
-  openBottomSheet(): void {
-    this.bottomSheet.open(BottomSheetOverviewExampleSheet);
+  createEvaluation(obj): any {
+    return {
+      author: {
+        authorID: this.user.info._id,
+        email: this.user.info.email,
+        name: this.user.info.name,
+        photoURL: this.user.info.photoURL
+      },
+      rating: obj.rating,
+      comment: obj.comment
+    }
+  }
+
+  openDialog(help, index): void {
+    let id = help && help._id;
+    let answerAuthorID = help.answers && help.answers[index].authorID;
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      width: '250px',
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result && result.rating) {
+        let evaluation = this.createEvaluation(result);
+        this.userService.addEvaluation(answerAuthorID, evaluation).subscribe(res=> {
+        }, err=> console.log(err));
+
+        this.helpService.favoriteAnswer(id, index).subscribe(res=> {
+          help.favoriteAnswer = help.answers && help.answers[index];
+          help.answers.splice(index,1);
+        }, err=> console.log(err));
+      }
+    });
   }
 
   ngOnInit() {
@@ -131,15 +170,28 @@ export class HelpDetailsComponent implements OnInit {
 
 }
 
-@Component({
-  selector: 'bottom-sheet-overview-example-sheet',
-  templateUrl: 'bottom-sheet-overview-example-sheet.html',
-})
-export class BottomSheetOverviewExampleSheet {
-  constructor(private bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>) {}
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
-  openLink(event: MouseEvent): void {
-    this.bottomSheetRef.dismiss();
-    event.preventDefault();
+export interface DialogData {
+  evaluation: any;
+}
+
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+})
+export class DialogOverviewExampleDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      this.data.evaluation = {
+        rating: Number,
+        comment: ""
+      };
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
