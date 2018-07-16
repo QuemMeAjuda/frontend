@@ -59,6 +59,16 @@ export class WelcomeComponent implements OnInit {
     return `url(${url})`;
   }
 
+  getNumber(help) {
+    let num = help.answers && help.answers.length;
+    num = help.favoriteAnswer ? (num+1) : num;
+    return num;
+  }
+
+  goToUserPage(authorID){
+    this._router.navigate(['/user_details', authorID]);
+  }
+
   ngOnInit() {
     this.watcher = this._routeAct.params.subscribe(
       (params: any) => {

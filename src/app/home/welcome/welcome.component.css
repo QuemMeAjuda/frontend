@@ -9,3 +9,19 @@
     background-size: cover;
   }
   
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 80%;
+}
+
+.closed-help {
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    background-color: rgb(51, 172, 88);
+    padding: 10px;
+  }
