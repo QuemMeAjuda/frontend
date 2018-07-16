@@ -26,13 +26,9 @@ export class AuthService {
   public loginWithGoogle(){
     const provider = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(provider).then((credential) => {
-      this.updateUser(credential);
       firebase.auth().currentUser.getIdToken().then(
         (idToken: string) => {
-            this.token_id = idToken;
-            localStorage.setItem('idToken', idToken);
-            this.router.navigate(['/']);
-
+            this.updateUser(credential, idToken);
         }
       );
     });
@@ -48,19 +44,22 @@ export class AuthService {
     return this.token_id !== undefined;
   }
 
-  getUser(data) {
+  getUser(data, idToken) {
     this.userService.getUserByEmail(data.email).subscribe(res=> {
       if(res['data'].length == 0){
-        this.userService.postUser(data).subscribe(res=>this.getUser(data), err=> err);
+        this.userService.postUser(data).subscribe(res=>this.getUser(data, idToken), err=> err);
       }else{
         _.extend(data, res['data'][0]);
         this.userInfo$ = new User(data);
         localStorage.setItem('userInfo', JSON.stringify(this.userInfo$));
+        this.token_id = idToken;
+        localStorage.setItem('idToken', idToken);
+        this.router.navigate(['/']);
       }
     }, err => err);
   }
 
-  updateUser(credential) {
+  updateUser(credential, idToken) {
     let data = {
       name: credential.user.displayName,
       email: credential.user.email,
@@ -68,7 +67,7 @@ export class AuthService {
       photoURL: credential.user.photoURL,
       uid: credential.user.uid
     };
-    this.getUser(data);
+    this.getUser(data, idToken);
   }
 
   getCurrentUser() {

@@ -21,9 +21,11 @@ export class AuthComponent {
   }
 
   login(): void {
+    localStorage.setItem('userInfo', JSON.stringify({}));
     this.AuthService.loginWithGoogle();
   }
   logout(): void {
+    localStorage.setItem('userInfo', JSON.stringify({}));
     this.AuthService.logout();
   }
   isLargerScreen(): boolean {

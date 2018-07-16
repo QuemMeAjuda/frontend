@@ -2,18 +2,22 @@
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
 </head>
 <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'" style="left: 0;" class="centered">
-  <h2 style="font-family: 'IBM Plex Sans Condensed', sans-serif;
+  <h3 *ngIf="helps && helps.length > 0" class="center" style="font-family: 'IBM Plex Sans Condensed', sans-serif;
       font-size: 100%; color: #1b2531" style="width:70%; margin:auto; margin-top: 25px">
-    Bem vindo ao QuemMeAjuda, essas são suas dúvidas respondidas até o momento:
-  </h2>
+    Bem vindo ao QuemMeAjuda, essas são suas dúvidas até o momento:
+  </h3>
+  <h3 *ngIf="helps && helps.length === 0" class="center" style="font-family: 'IBM Plex Sans Condensed', sans-serif;
+    font-size: 100%; color: #1b2531" style="width:70%; margin:auto; margin-top: 25px">
+    Bem vindo ao QuemMeAjuda, você não tem nenhuma dúvida feita até o momento
+  </h3>
   <div *ngFor="let help of helps">
     <div layout="column" style="margin-bottom: 15px;">
       <div style="margin-top: 25px; right: 0;">
         <div class="center">
-          <mat-card>
+          <mat-card style="max-width: 520px; min-width: 400px;">
             <mat-card-header>
               <mat-card-title>
-                <a routerLink="/help_details/{{help._id}}"><b>{{help.generalDescription}}</b></a>
+                <a style="text-decoration: none" routerLink="/help_details/{{help._id}}"><b>Descriçao geral: {{help.generalDescription}}</b></a>
               </mat-card-title>
             </mat-card-header>
             <mat-card-content>
@@ -21,13 +25,43 @@
                 {{help.detailedDescription}}
               </p>
             </mat-card-content>
+            <div [hidden]="!help.showanswersState" *ngIf="help.closed && help.favoriteAnswer" layout="column" style="margin-bottom: 15px;">
+                <div style="margin-top: 10px; right: 0;">
+                  <div>
+                    <mat-card>
+                      <div style="margin-bottom: 20px;" class="closed-help">RESPOSTA FAVORITA</div>
+                      <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"
+                        [ngStyle]="{'background-image': getUrl(help.favoriteAnswer)}"></div>
+                        
+                        <mat-card-title style="margin-top: 10px">
+                          <a style="text-decoration: none" routerLink="" (click)="goToUserPage(help.favoriteAnswer && help.favoriteAnswer.authorID)">
+                          {{help.favoriteAnswer && help.favoriteAnswer.author && help.favoriteAnswer.author.name}}</a> respondeu:
+                        </mat-card-title>
+                      </mat-card-header>
+                      <mat-card-content style="margin-top: 15px">
+                        <div *ngIf="help.favoriteAnswer && help.favoriteAnswer.photoURL" flex>
+                          <img style="margin-top: 25px; margin: 0 5 0 5" class="mat-card-image" [src]="help.favoriteAnswer && help.favoriteAnswer.photoURL"/>
+                        </div>
+      
+                        <p class="mat-card-content" *ngIf="help.favoriteAnswer && !help.favoriteAnswer.photoURL" style="white-space: pre-line;  word-wrap: break-word;">
+                          {{help.favoriteAnswer && help.favoriteAnswer.answer}}
+                        </p>
+                      </mat-card-content>
+                    </mat-card>
+                </div>
+                </div>
+              </div>
             <div [hidden]="!help.showanswersState" *ngFor="let answer of help.answers" layout="column" style="margin-bottom: 15px;">
-              <div style="margin-top: 10px; right: 0;">
+              <div style="margin-top: 20px; right: 0;">
                 <div class="center">
-                  <mat-card>
+                  <mat-card style="max-width: 420px; min-width: 300px;">
                     <mat-card-header>
                       <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': getUrl(answer)}"></div>
-                      <mat-card-title style="margin-top: 10px">{{answer.author && answer.author.name}} respondeu:</mat-card-title>
+                      <mat-card-title style="margin-top: 10px">
+                          <a style="text-decoration: none" routerLink="" (click)="goToUserPage(answer && answer.authorID)">
+                            {{answer.author && answer.author.name}}</a> respondeu:
+                      </mat-card-title>
                     </mat-card-header>
                     <mat-card-content>
                       <p style="margin-top: 10px">
@@ -38,9 +72,13 @@
               </div>
               </div>
             </div>
-            <div style="float: right">
+            <div *ngIf="help && help.answers && help.answers.length === 0" style="float: right">
+                <button style="background-color: #64B5F6; color: white" mat-raised-button (click)="null">
+                    Nenhuma resposta até o momento</button>
+            </div>
+            <div *ngIf="help && help.answers && help.answers.length > 0" style="float: right">
                 <button *ngIf="!help.showanswersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowanswersState(help)">
-                    <mat-icon>keyboard_arrow_down</mat-icon>{{help.answers && help.answers.length}} respostas, clique para ver</button>
+                    <mat-icon>keyboard_arrow_down</mat-icon>{{getNumber(help)}} respostas, clique para ver</button>
                 <button *ngIf="help.showanswersState" style="background-color: #64B5F6; color: white" mat-raised-button (click)="setShowanswersState(help)">
                     <mat-icon>keyboard_arrow_up</mat-icon>Esconder</button>
             </div>
@@ -49,8 +87,10 @@
       </div>
     </div>
   </div>
-  <button mat-raised-button style="background-color: #FF3D00; color: white;
-   margin-bottom: 20px; margin-top: 8px; margin-right: 8px" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
-   <button mat-raised-button style="background-color: #004D40; color: white;
-   margin-bottom: 20px; margin-top: 8px;" (click)="goToHome()">Ir para home</button>
+  <div class="center">
+    <button mat-raised-button style="background-color: #FF3D00; color: white;
+    margin-bottom: 20px; margin-top: 8px; margin-right: 8px" (click)="goToAskHelp()">Pedir Nova Ajuda!</button>
+    <button mat-raised-button style="background-color: #004D40; color: white;
+    margin-bottom: 20px; margin-top: 8px;" (click)="goToHome()">Ir para home</button>
+  </div>
 </div>

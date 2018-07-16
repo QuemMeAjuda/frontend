@@ -1,9 +1,12 @@
 <div>
+  <div class="center" *ngIf="!helps">
+    <h3>Nenhuma dúvida no momento. Faça a primeira! No menu lateral clique em "Pedir ajuda".</h3>
+  </div>
   <app-help-details *ngFor="let help of helps" 
   [receivedHelp]="help"
   [isTimeline]="true">
   </app-help-details>
-  <div layout="row" class="center" style="margin-bottom: 20px;">
+  <div *ngIf="helps" layout="row" class="center" style="margin-bottom: 20px;">
     <button mat-button (click)="previousPage()">
       <mat-icon>keyboard_arrow_left</mat-icon>
       Página anterior
