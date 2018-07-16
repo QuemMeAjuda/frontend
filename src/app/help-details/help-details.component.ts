@@ -26,8 +26,6 @@ export class HelpDetailsComponent implements OnInit {
   @Input() receivedHelp: any;
   @Input() isTimeline: boolean;
 
-  evaluation: any;
-
   constructor(private routeAct: ActivatedRoute,
       private router: Router,
       private helpService: HelpService,
@@ -60,9 +58,8 @@ export class HelpDetailsComponent implements OnInit {
         name: this.user.info.name,
         photoURL: this.user.info.photoURL,
         email: this.user.info.email,
-        _id: this.user.info._id,
-        evaluation: this.user.info.evaluation,
       },
+      authorID: this.user.info._id,
       answer: this.currentAnswer,
       photoURL: this.answerPhotoURL,
     }
@@ -114,24 +111,36 @@ export class HelpDetailsComponent implements OnInit {
     return `url(${url})`;
   }
 
+  createEvaluation(obj): any {
+    return {
+      author: {
+        authorID: this.user.info._id,
+        email: this.user.info.email,
+        name: this.user.info.name,
+        photoURL: this.user.info.photoURL
+      },
+      rating: obj.rating,
+      comment: obj.comment
+    }
+  }
+
   openDialog(help, index): void {
     let id = help && help._id;
-    console.log(help, index)
     let answerAuthorID = help.answers && help.answers[index].authorID;
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '250px',
-      data: {evaluation: this.evaluation}
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      if(result && result.rate) {
-        this.userService.addEvaluation(answerAuthorID, result).subscribe(res=> {
-          help.answers[index].favorite = true;
+      if(result && result.rating) {
+        let evaluation = this.createEvaluation(result);
+        this.userService.addEvaluation(answerAuthorID, evaluation).subscribe(res=> {
         }, err=> console.log(err));
 
         this.helpService.favoriteAnswer(id, index).subscribe(res=> {
-          help.answers[index].favorite = true;
+          help.favoriteAnswer = help.answers && help.answers[index];
+          help.answers.splice(index,1);
         }, err=> console.log(err));
       }
     });

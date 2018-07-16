@@ -12,12 +12,14 @@
       <mat-card-content layout="row">
         <div style="width: 50%; margin: auto">
           <p><b>Avaliações:</b></p>
-          <mat-card *ngFor="let eval of (currentUser && currentUser.evaluation)">
+          <mat-card style="margin-bottom: 10px;" *ngFor="let eval of (currentUser && currentUser.evaluation)">
               <mat-card-header>
                   <div mat-card-avatar class="example-header-image"
                   [ngStyle]="{'background-image': getEvalUrl(eval.author)}"></div>
                   <mat-card-title style="margin-top: 10px"><a style="text-decoration: none" routerLink="" (click)="goToUserPage(eval.author.authorID)">{{eval.author.name}}</a> avaliou:</mat-card-title>
-                  <mat-card-subtitle>Nota:</mat-card-subtitle>
+                  <mat-card-subtitle>Nota:
+                      <bar-rating [rate]="eval.rating" [max]="5"></bar-rating>
+                  </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content style="margin-top: 15px">
                   <p class="mat-card-content" style="white-space: pre-line;  word-wrap: break-word;">

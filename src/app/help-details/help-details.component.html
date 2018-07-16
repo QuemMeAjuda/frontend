@@ -44,6 +44,31 @@
         <p *ngIf="help.answers && help.answers.length !== 0">
             Respostas:
         </p>
+        <div *ngIf="help.closed && help.favoriteAnswer" layout="column" style="margin-bottom: 15px;">
+          <div style="margin-top: 10px; right: 0;">
+            <div>
+              <mat-card>
+                <div style="margin-bottom: 20px;" class="closed-help">RESPOSTA FAVORITA</div>
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"
+                  [ngStyle]="{'background-image': getUrl(help.favoriteAnswer)}"></div>
+                  
+                  <mat-card-title style="margin-top: 10px"><a style="text-decoration: none" routerLink="" (click)="goToUserPage(help.favoriteAnswer && help.favoriteAnswer.authorID)">
+                    {{help.favoriteAnswer && help.favoriteAnswer.author && help.favoriteAnswer.author.name}}</a> respondeu:</mat-card-title>
+                </mat-card-header>
+                <mat-card-content style="margin-top: 15px">
+                  <div *ngIf="help.favoriteAnswer && help.favoriteAnswer.photoURL" flex>
+                    <img style="margin-top: 25px; margin: 0 5 0 5" class="mat-card-image" [src]="help.favoriteAnswer && help.favoriteAnswer.photoURL"/>
+                  </div>
+
+                  <p class="mat-card-content" *ngIf="help.favoriteAnswer && !help.favoriteAnswer.photoURL" style="white-space: pre-line;  word-wrap: break-word;">
+                    {{help.favoriteAnswer && help.favoriteAnswer.answer}}
+                  </p>
+                </mat-card-content>
+              </mat-card>
+          </div>
+          </div>
+        </div>
         <div *ngFor="let answer of help.answers; let i = index" layout="column" style="margin-bottom: 15px;">
           <div style="margin-top: 10px; right: 0;">
             <div>
@@ -64,12 +89,12 @@
                   </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button style="margin-left: 90%; margin-top: 15px;" *ngIf="!help.closed && user.info._id === help.authorID"
+                  <button style="margin-left: 90%; margin-top: 15px;" *ngIf="!help.closed && !help.favoriteAnswer && user.info._id === help.authorID"
                     mat-button class="mat-icon-button" (click)="deleteAnswer(help, i)">
                     <mat-icon title="Excluir">delete</mat-icon>
                   </button>
                   <button style="margin-left: 80%; margin-top: 15px;"
-                    *ngIf="help.closed && user.info._id === help.authorID && user.info._id !== answer.authorID"
+                    *ngIf="help.closed && !help.favoriteAnswer && user.info._id === help.authorID && user.info._id !== answer.authorID"
                     mat-button (click)="openDialog(help, i)">
                     Avaliar
                   </button>
@@ -79,7 +104,7 @@
           </div>
         </div>
       </div>
-      <form *ngIf="!help.closed && !isTimeline && !commentWithPhoto && (user.isTutor() || user.info._id === help.authorID)" class="answer-class">
+      <form *ngIf="(!help.closed && !isTimeline && !commentWithPhoto) || (!help.closed && !isTimeline && !commentWithPhoto && user.info._id === help.authorID)" class="answer-class">
         <mat-form-field class="answer-class-width">
           <textarea name="answer" matInput placeholder="Deixe sua resposta" [(ngModel)]="currentAnswer"></textarea>
         </mat-form-field>
@@ -87,13 +112,13 @@
       <app-upload *ngIf="!help.closed && !isTimeline && commentWithPhoto" (endURL)="receivePhotoURL($event)">Teste</app-upload>
         <mat-card-actions>
           <button *ngIf="isTimeline" mat-button (click)="goToHelp(help)">Ir para ajuda</button>
-          <mat-slide-toggle *ngIf="!help.closed && !isTimeline && (user.isTutor() || user.info._id === help.authorID)" style="margin-left: 5%;"
+          <mat-slide-toggle *ngIf="(!help.closed && !isTimeline) || (!help.closed && !isTimeline && user.info._id === help.authorID)" style="margin-left: 5%;"
             color="primary"
             [(ngModel)]="commentWithPhoto"
             [disabled]="disabled">
             Responder com imagem
           </mat-slide-toggle>
-          <button *ngIf="!help.closed && !isTimeline && (user.isTutor() || user.info._id === help.authorID)" mat-button
+          <button *ngIf="(!help.closed && !isTimeline) || (!help.closed && !isTimeline && user.info._id === help.authorID)" mat-button
           [disabled]="(!commentWithPhoto && !currentAnswer) || (commentWithPhoto && !answerPhotoURL)" (click)="addAnswer(help)"
           style="background-color: rgb(27, 104, 155); color: white; margin-left: 65%;">
           <mat-icon style="padding-right: 3px">send</mat-icon>Responder</button>

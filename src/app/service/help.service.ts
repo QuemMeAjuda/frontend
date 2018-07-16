@@ -49,7 +49,7 @@ export class HelpService {
     }
 
     favoriteAnswer(id, index: any): Observable<any> {
-        return this.http.put(`${this.url}/ajuda/favoriteAnswer/${id}`, index);
+        return this.http.put(`${this.url}/ajuda/favoriteAnswer/${id}`, {index: index});
     }
 
     constructor(private http :HttpClient) {}
