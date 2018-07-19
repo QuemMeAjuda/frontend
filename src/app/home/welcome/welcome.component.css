@@ -25,3 +25,12 @@
     background-color: rgb(51, 172, 88);
     padding: 10px;
   }
+
+  .pending-help {
+    color: rgb(14, 13, 13);
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    background-color: rgb(202, 202, 202);
+    padding: 10px;
+  }

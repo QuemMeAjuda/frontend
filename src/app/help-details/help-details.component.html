@@ -8,41 +8,47 @@
         <div *ngIf="help.closed" style="margin-bottom: 20px;" class="closed-help">RESOLVIDO</div>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': getUrl(help)}"></div>
-          <div style="margin-left: 50%" layout="end end">
-              <div class="dropdown" 
-              *ngIf="!isTimeline && user.info._id === help.authorID">
-                  <span>
-                    <button style="margin-right: -75%" mat-button class="mat-icon-button" (click)="null">
-                      <mat-icon title="Opções">more_vert</mat-icon>
-                    </button>
-                  </span>
-                  <div class="dropdown-content">
-                    <button *ngIf="user.info._id === help.authorID" 
-                            mat-button (click)="deleteHelp(help)">
-                            Excluir pedido de ajuda
-                    </button>
-                    <button *ngIf="user.info._id === help.authorID 
-                    && help.answers.length > 0 && !help.closed" 
-                            mat-button (click)="closeHelp(help)">
-                            Marcar como resolvido
-                    </button>
-                  </div>
+          <mat-card-title>
+            <p style="white-space: pre-line;  word-break: break-all;">
+                <b>Resumo:</b> {{help.generalDescription}}
+            </p>
+          </mat-card-title>
+          <mat-card-subtitle style="white-space: pre-line;  word-break: break-all;">
+            <b>Autor:</b> <a style="text-decoration: none" routerLink="" (click)="goToUserPage(help.authorID)"> {{help.author && help.author.name}}</a>
+          </mat-card-subtitle>
+          <div style="margin-left: auto">
+            <div class="dropdown" 
+            *ngIf="!isTimeline && user.info._id === help.authorID">
+                <span>
+                  <button style="margin-right: -75%" mat-button class="mat-icon-button" (click)="null">
+                    <mat-icon title="Opções">more_vert</mat-icon>
+                  </button>
+                </span>
+                <div class="dropdown-content">
+                  <button *ngIf="user.info._id === help.authorID" 
+                          mat-button (click)="deleteHelp(help)">
+                          Excluir pedido de ajuda
+                  </button>
+                  <button *ngIf="user.info._id === help.authorID 
+                  && help.answers.length > 0 && !help.closed" 
+                          mat-button (click)="closeHelp(help)">
+                          Marcar como resolvido
+                  </button>
                 </div>
-          </div>
-          <mat-card-title>Resumo: {{help.generalDescription}}</mat-card-title>
-          <mat-card-subtitle>Autor: <a style="text-decoration: none" routerLink="" (click)="goToUserPage(help.authorID)">{{help.author && help.author.name}}</a></mat-card-subtitle>
+              </div>
+        </div>
         </mat-card-header>
         <mat-card-content>
           <p>
-            Descrição:
+            <b>Descrição:</b>
           </p>
-          <p>
+          <p style="white-space: pre-line;  word-wrap: break-word;">
             {{help.detailedDescription}}
           </p>
         </mat-card-content>
         <div *ngIf="!isTimeline">
         <p *ngIf="help.answers && help.answers.length !== 0">
-            Respostas:
+            <b>Respostas:</b>
         </p>
         <div *ngIf="help.closed && help.favoriteAnswer" layout="column" style="margin-bottom: 15px;">
           <div style="margin-top: 10px; right: 0;">
