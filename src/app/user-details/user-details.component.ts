@@ -32,7 +32,8 @@ export class UserDetailsComponent implements OnInit {
       a+=b.rating;
       return a;
     },0);
-    return (total / (this.currentUser && this.currentUser.evaluation.length)) || "Não avaliado ainda";
+    let result = (total / (this.currentUser && this.currentUser.evaluation.length))
+    return result && result.toFixed(2) || "Não avaliado ainda";
   }
 
   ngOnInit() {

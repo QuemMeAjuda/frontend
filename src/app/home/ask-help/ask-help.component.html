@@ -1,6 +1,9 @@
 <div layout="column" style="margin-top: 30px;">
-
-  <div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen'" class="centered">
+    <h3 class="center" style="font-family: 'IBM Plex Sans Condensed', sans-serif;
+        font-size: 100%; color: #1b2531" style="width:70%; margin:auto; margin-top: 25px">
+      Novo pedido de ajuda
+    </h3>
+  <div style="margin-top: 40px;" [ngClass]="isLargerScreen()? 'split' : 'split-small-screen'" class="centered">
     <div class="ask_help-container" style="background: white;">
         <mat-form-field hintLabel="Máximo 144 carácters">
           <input matInput #input [(ngModel)]="shortDesc" maxlength="144" placeholder="Descrição geral da dúvida">
@@ -12,7 +15,7 @@
         </mat-form-field>
 
         <mat-form-field>
-          <input matInput [(ngModel)]="tags" placeholder="Tags Ex.: 'While, For'">
+          <input matInput [(ngModel)]="tags" placeholder="Tags, ex.: 'Cálculo, While, For, etc...'">
         </mat-form-field>
 
         <button mat-button (click)="sendOrder(shortDesc,longDesc,tags)">Enviar Pedido</button>

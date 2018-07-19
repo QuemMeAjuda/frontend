@@ -69,12 +69,20 @@ export class WelcomeComponent implements OnInit {
     this._router.navigate(['/user_details', authorID]);
   }
 
+  goToHelp(helpID) {
+    this._router.navigate(['/help_details', helpID]);
+  }
+
   ngOnInit() {
     this.watcher = this._routeAct.params.subscribe(
       (params: any) => {
         this.authorID = params['authorID'];
         this._helpService.getHelpsByUser(this.authorID).subscribe(res=> {
-          this.helps = res['data'];
+          if(this.authorID === this.user.info._id) {
+            this.helps = res['data'];
+          } else {
+            this._router.navigate(['/welcome', this.user.info._id]);
+          }
         }, err=> console.log(err));
       }
     );
