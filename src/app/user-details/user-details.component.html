@@ -11,7 +11,7 @@
       </mat-card-header>
       <mat-card-content layout="row">
         <div style="width: 50%; margin: auto">
-          <p><b>Avaliações:</b></p>
+          <p *ngIf="currentUser && currentUser.evaluation && currentUser.evaluation.length > 0"><b>Avaliações:</b></p>
           <mat-card style="margin-bottom: 10px;" *ngFor="let eval of (currentUser && currentUser.evaluation)">
               <mat-card-header>
                   <div mat-card-avatar class="example-header-image"

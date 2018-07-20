@@ -1,11 +1,11 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
 </head>
-<div layout="column" style="margin-bottom: 15px;">
+<div *ngIf="help" layout="column" style="margin-bottom: 15px;">
   <div style="margin-top: 25px; right: 0;">
     <div class="center">
       <mat-card [ngClass]="isTimeline ? 'fixed-card' : 'example-card'">
-        <div *ngIf="help.closed" style="margin-bottom: 20px;" class="closed-help">RESOLVIDO</div>
+        <div *ngIf="help && help.closed" style="margin-bottom: 20px;" class="closed-help">RESOLVIDO</div>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': getUrl(help)}"></div>
           <mat-card-title>

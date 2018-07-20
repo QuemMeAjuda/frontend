@@ -35,6 +35,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MockSystemComponent } from './mock-system/mock-system.component';
 import { DialogOverviewExampleDialog } from './help-details/help-details.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     FileSizePipe,
     MockSystemComponent,
     DialogOverviewExampleDialog,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ErrorComponent
   ],
   imports: [
   BrowserModule,

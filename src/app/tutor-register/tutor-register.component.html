@@ -1,7 +1,10 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
 </head>
-<div [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'"
+<h3>Olá, na nossa versão atual é possível fazer cadastro e login apenas utilizando contas Google. Em breve o sistema terá suporte para cadastro
+   que não seja por meio de autenticação da Google. :)
+</h3>
+<div *ngIf="false" [ngClass]="isLargerScreen()? 'split' : 'split-small-screen upside-small'"
      style="font-family: 'IBM Plex Sans Condensed', sans-serif;color: white; background-color: #1b2531; height: 100vh" >
   <mat-card style="width: 80%; margin: auto; top: 3%;">
     <mat-card-title style="text-align: center">Cadastro como Tutor</mat-card-title>

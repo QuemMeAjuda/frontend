@@ -1,4 +1,12 @@
-<mat-card style="background: #1b2531; height: 100vh; text-align: center">
+<div layout="row">
+  <h3 style="text-align: center; font-size: 30px;">Olá, na versão atual do QuemMeAjuda é possível fazer cadastro e login apenas utilizando contas Google. Em breve o sistema terá suporte para cadastro
+    que não seja por meio de autenticação da Google. :)
+  </h3>
+  <div style="text-align: center">
+    <a style="text-decoration: none; font-size: 20px;" routerLink="" (click)="goToHome()">Voltar para página inicial</a>
+  </div>
+</div>
+<mat-card *ngIf="false" style="background: #1b2531; height: 100vh; text-align: center">
   <div style="background-color: azure">
   <mat-card-title>Novo Cadastro</mat-card-title>
   <mat-card-content>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {PasswordValidation} from "./passwordValidation.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +12,8 @@ export class SignupComponent implements OnInit {
 
   protected form: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder) { }
+  constructor(private _formBuilder: FormBuilder,
+              private _router: Router) { }
 
   ngOnInit() {
     this.formInitialization()
@@ -33,6 +35,10 @@ export class SignupComponent implements OnInit {
 
   isValidForm() {
     return this.form.valid;
+  }
+
+  goToHome() {
+    this._router.navigate(['/']);
   }
 
   onSubmit(){

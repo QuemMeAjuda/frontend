@@ -42,7 +42,10 @@ export class UserDetailsComponent implements OnInit {
         this.id = params['id'];
         this.userService.getUserByID(this.id).subscribe(res=> {
           this.currentUser = res['data'];
-        }, err=> console.log(err));
+        }, err=> {
+          console.log(err);
+          this.router.navigate(['/not_found']);
+        });
       }
     );
   }

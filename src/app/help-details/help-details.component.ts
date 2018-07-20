@@ -155,7 +155,10 @@ export class HelpDetailsComponent implements OnInit {
           this.id = params['id'];
           this.helpService.getHelp(this.id).subscribe(res=> {
             this.help = res['data'];
-          }, err=> console.log(err));
+          }, err=> {
+            console.log(err);
+            this.router.navigate(['/not_found']);
+          });
         }
       );
     }
