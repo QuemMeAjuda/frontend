@@ -65,6 +65,9 @@ export class HomeComponent {
   goToOwnHelps() {
     this.router.navigate(['/welcome', this.user.info._id]);
   }
+  goToRankUsers() {
+    this.router.navigate(['/rank_users']);
+  }
   logout(): void {
     this.auth.logout();
   }

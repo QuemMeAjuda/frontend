@@ -42,7 +42,10 @@ export class UserDetailsComponent implements OnInit {
         this.id = params['id'];
         this.userService.getUserByID(this.id).subscribe(res=> {
           this.currentUser = res['data'];
-        }, err=> console.log(err));
+        }, err=> {
+          console.log(err);
+          this.router.navigate(['/not_found']);
+        });
       }
     );
   }
@@ -56,6 +59,9 @@ export class UserDetailsComponent implements OnInit {
     this.router.navigate(['/user_details', id]);
   }
 
+  goToHelp(helpID) {
+    this.router.navigate(['/help_details', helpID]);
+  }
   ngOnDestroy(){
     if (this.watcher) {
       this.watcher.unsubscribe();

@@ -20,7 +20,7 @@ import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AskHelpComponent } from './home/ask-help/ask-help.component';
 import { TutorRegisterComponent } from './tutor-register/tutor-register.component';
-import { HelpDetailsComponent } from './help-details/help-details.component';
+import { HelpDetailsComponent, EditHelpDialog } from './help-details/help-details.component';
 import { HelpService } from './service/help.service';
 import { TimelineComponent } from './home/timeline/timeline.component';
 import { WelcomeComponent } from './home/welcome/welcome.component';
@@ -35,6 +35,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { MockSystemComponent } from './mock-system/mock-system.component';
 import { DialogOverviewExampleDialog } from './help-details/help-details.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
+import { ErrorComponent } from './error/error.component';
+import { RankUsersComponent } from './rank-users/rank-users.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,10 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     FileSizePipe,
     MockSystemComponent,
     DialogOverviewExampleDialog,
-    UserDetailsComponent
+    UserDetailsComponent,
+    ErrorComponent,
+    EditHelpDialog,
+    RankUsersComponent
   ],
   imports: [
   BrowserModule,
@@ -69,7 +74,7 @@ import { UserDetailsComponent } from './user-details/user-details.component';
     AngularFireAuthModule,
     AngularFireStorageModule,
   ],
-  entryComponents: [HomeComponent, DialogOverviewExampleDialog],
+  entryComponents: [HomeComponent, DialogOverviewExampleDialog, EditHelpDialog],
   providers: [AuthService, AuthGuard,UserService, HelpService],
   bootstrap: [AppComponent]
 })

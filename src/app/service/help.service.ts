@@ -29,6 +29,10 @@ export class HelpService {
         return this.http.delete(`${this.url}/ajuda/deleteAjuda/${id}`);
     }
 
+    editHelp(id, info: any): Observable<any>{
+        return this.http.put(`${this.url}/ajuda/updateAjuda/${id}`, info);
+    }
+
     closeHelp(id): Observable<any>{
         return this.http.put(`${this.url}/ajuda/closeAjuda/${id}`, {});
     }

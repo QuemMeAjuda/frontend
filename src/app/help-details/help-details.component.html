@@ -1,11 +1,11 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
 </head>
-<div layout="column" style="margin-bottom: 15px;">
+<div *ngIf="help" layout="column" style="margin-bottom: 15px;">
   <div style="margin-top: 25px; right: 0;">
     <div class="center">
       <mat-card [ngClass]="isTimeline ? 'fixed-card' : 'example-card'">
-        <div *ngIf="help.closed" style="margin-bottom: 20px;" class="closed-help">RESOLVIDO</div>
+        <div *ngIf="help && help.closed" style="margin-bottom: 20px;" class="closed-help">RESOLVIDO</div>
         <mat-card-header>
           <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': getUrl(help)}"></div>
           <mat-card-title>
@@ -33,6 +33,11 @@
                   && help.answers.length > 0 && !help.closed" 
                           mat-button (click)="closeHelp(help)">
                           Marcar como resolvido
+                  </button>
+                  <button *ngIf="user.info._id === help.authorID 
+                   && !help.closed" 
+                          mat-button (click)="editHelp(help)">
+                          Editar pedido de ajuda
                   </button>
                 </div>
               </div>
@@ -98,11 +103,12 @@
                   </p>
                 </mat-card-content>
                 <mat-card-actions>
-                  <button style="margin-left: 90%; margin-top: 15px;" *ngIf="!help.closed && !help.favoriteAnswer && user.info._id === help.authorID"
+                  <button style="margin-left: 90%; margin-top: 15px;"
+                    *ngIf="!help.closed && !help.favoriteAnswer && (user.info._id === help.authorID || user.info._id === answer.authorID)"
                     mat-button class="mat-icon-button" (click)="deleteAnswer(help, i)">
                     <mat-icon title="Excluir">delete</mat-icon>
                   </button>
-                  <button style="margin-left: 80%; margin-top: 15px;"
+                  <button style="margin-left: 75%; margin-top: 15px;"
                     *ngIf="help.closed && !help.favoriteAnswer && user.info._id === help.authorID && user.info._id !== answer.authorID"
                     mat-button (click)="openDialog(help, i)">
                     Avaliar

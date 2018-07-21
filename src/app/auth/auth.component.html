@@ -34,7 +34,7 @@
               </div>
               <div class="center">
                 <button  mat-raised-button type="submit"
-                  style="background-color: #d51936; width: 100%;">
+                  style="background-color: #d51936; width: 100%;" (click)="resetPassword()">
                   <span style="margin-left: 10px; color: white">Entrar</span>
                 </button>
               </div>
@@ -54,7 +54,7 @@
           hide-gt-xs style="font-size: 11px; margin-left: 0; color:#d51936">
           Criar conta
         </button>
-        <button mat-button flex-xs="60" class="mat-primary" (click)="null"
+        <button mat-button flex-xs="60" class="mat-primary" (click)="simpleLogin()"
           hide-gt-xs style="font-size: 11px; margin-left: 0; color:#d51936">
           Esqueceu a senha?
         </button>
