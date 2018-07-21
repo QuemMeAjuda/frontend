@@ -1,3 +1,25 @@
-<p>
-  rank-users works!
-</p>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans+Condensed:400,600" rel="stylesheet">
+</head>
+<h4 class="center" style="margin-top:15px;">Ranking de usuários</h4>
+<div layout="row" *ngFor="let user of users">
+<div style="margin-bottom: 15px; margin-top: 5px;" class="center">
+  <mat-card style="min-width: 400px; max-width: 520px;">
+      <mat-card-header>
+          <div mat-card-avatar class="example-header-image"
+          [ngStyle]="{'background-image': getPhoto(user)}"></div>
+          <mat-card-title style="margin-top: 10px">
+            <a style="text-decoration: none" routerLink="" (click)="goToUserPage(user)">{{user && user.name}}</a>
+          </mat-card-title>
+          <mat-card-subtitle>
+            <p>Média: {{getRate(user)}}</p>
+          </mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content style="margin-top: 15px">
+          <p class="mat-card-content" style="white-space: pre-line;  word-wrap: break-word;">
+            Melhores respostas: {{user && user.evaluation && user.evaluation.length}}
+          </p>
+        </mat-card-content>
+  </mat-card>
+</div>
+</div>
