@@ -36,7 +36,6 @@ export class RankUsersComponent implements OnInit {
   ngOnInit() {
     this.userService.getTopUsers().subscribe(res=> {
       this.users = res['data'];
-      console.log(this.users);
     }, err=> {
       console.log(err);
       this.router.navigate(['/not_found']);
