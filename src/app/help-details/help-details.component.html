@@ -34,6 +34,11 @@
                           mat-button (click)="closeHelp(help)">
                           Marcar como resolvido
                   </button>
+                  <button *ngIf="user.info._id === help.authorID 
+                   && !help.closed" 
+                          mat-button (click)="editHelp(help)">
+                          Editar pedido de ajuda
+                  </button>
                 </div>
               </div>
         </div>

@@ -1,0 +1,17 @@
+<div layout="row" class="example-card" style="width: 100%">
+    <h1 mat-dialog-title>Editar ajuda</h1>
+    <div class="ask_help-container" layout="row">
+        <mat-form-field hintLabel="Máximo 144 carácters"  style="min-width: 100%">
+            <input matInput #input [(ngModel)]="data.info.generalDescription" maxlength="144" placeholder="Descrição geral da dúvida">
+            <mat-hint align="end">{{input.value?.length || 0}}/144</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field style="margin-top: 3px;" style="min-width: 100%">
+            <textarea matInput [(ngModel)]="data.info.detailedDescription" placeholder="Descrição detalhada da dúvida"></textarea>
+        </mat-form-field>
+    </div>
+    <div mat-dialog-actions style="margin-right: auto;">
+        <button mat-button (click)="onNoClick()">Cancelar</button>
+        <button mat-button [mat-dialog-close]="data.info" cdkFocusInitial>Finalizar</button>
+    </div>
+</div>

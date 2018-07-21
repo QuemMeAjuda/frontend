@@ -77,14 +77,16 @@ export class HelpDetailsComponent implements OnInit {
       this.currentAnswer = "";
       this.answerPhotoURL = "";
       this.commentWithPhoto = false;
-    }, err=> console.log(err));
+      this.openSnackBar("Resposta adicionada com sucesso!", "Fechar");
+    }, err=> this.openSnackBar("Ocorreu um erro!", "Fechar"));
   }
 
   deleteAnswer(help, index){
     let id = help && help._id;
     this.helpService.deleteAnswer(id, index).subscribe(res=> {
       this.help.answers.splice(index,1);
-    }, err=> console.log(err));
+      this.openSnackBar("Resposta deletada com sucesso!", "Fechar");
+    }, err=> this.openSnackBar("Ocorreu um erro!", "Fechar"));
   }
 
   receivePhotoURL(answerPhotoURL) {
@@ -94,8 +96,9 @@ export class HelpDetailsComponent implements OnInit {
   deleteHelp(help: any){
     let id = help && help._id;
     this.helpService.deleteHelp(id).subscribe(res=> {
+      this.openSnackBar("Pedido de ajuda deletado com sucesso!", "Fechar");
       this.homeComponent.goToHome();
-    }, err=> console.log(err));
+    }, err=> this.openSnackBar("Ocorreu um erro!", "Fechar"));
   }
 
   closeHelp(help: any) {
@@ -103,7 +106,7 @@ export class HelpDetailsComponent implements OnInit {
     this.helpService.closeHelp(id).subscribe(res=> {
       help.closed = true;
       this.openSnackBar("Avalie a melhor resposta!", "Fechar");
-    }, err=> console.log(err));
+    }, err=> this.openSnackBar("Ocorreu um erro!", "Fechar"));
   }
 
   getUrl(obj) {
@@ -141,7 +144,34 @@ export class HelpDetailsComponent implements OnInit {
         this.helpService.favoriteAnswer(id, index).subscribe(res=> {
           help.favoriteAnswer = help.answers && help.answers[index];
           help.answers.splice(index,1);
+          this.openSnackBar("Resposta avaliada com sucesso!", "Fechar");
         }, err=> console.log(err));
+      }
+    });
+  }
+
+  editHelp(help): void {
+    let id = help && help._id;
+    let info = {
+        generalDescription: help.generalDescription,
+        detailedDescription: help.detailedDescription,
+    }
+    const dialogRef = this.dialog.open(EditHelpDialog, {
+      height: '300px',
+      width: '400px',
+      data: {
+        info: info
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(info.generalDescription !== help.generalDescription
+        || info.detailedDescription !== help.detailedDescription) {
+        this.helpService.editHelp(id, info).subscribe(res=> {
+          this.help.generalDescription = result.generalDescription;
+          this.help.detailedDescription = result.detailedDescription;
+          this.openSnackBar("Ajuda editada com sucesso!", "Fechar");
+        }, err=> this.openSnackBar("Ocorreu um erro!", "Fechar"));
       }
     });
   }
@@ -192,6 +222,27 @@ export class DialogOverviewExampleDialog {
         rating: Number,
         comment: ""
       };
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
+
+export interface EditHelpData {
+  info: any;
+}
+
+@Component({
+  selector: 'edit-help',
+  templateUrl: 'edit-help.html',
+})
+export class EditHelpDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<EditHelpDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: EditHelpData) {
+
     }
 
   onNoClick(): void {
