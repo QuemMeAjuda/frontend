@@ -36,6 +36,7 @@ import { MockSystemComponent } from './mock-system/mock-system.component';
 import { DialogOverviewExampleDialog } from './help-details/help-details.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ErrorComponent } from './error/error.component';
+import { RankUsersComponent } from './rank-users/rank-users.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ErrorComponent } from './error/error.component';
     DialogOverviewExampleDialog,
     UserDetailsComponent,
     ErrorComponent,
-    EditHelpDialog
+    EditHelpDialog,
+    RankUsersComponent
   ],
   imports: [
   BrowserModule,

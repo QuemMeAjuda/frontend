@@ -123,7 +123,8 @@ export class HelpDetailsComponent implements OnInit {
         photoURL: this.user.info.photoURL
       },
       rating: obj.rating,
-      comment: obj.comment
+      comment: obj.comment,
+      helpID: this.help._id
     }
   }
 

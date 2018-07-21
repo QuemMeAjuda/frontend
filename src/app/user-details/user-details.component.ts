@@ -59,6 +59,9 @@ export class UserDetailsComponent implements OnInit {
     this.router.navigate(['/user_details', id]);
   }
 
+  goToHelp(helpID) {
+    this.router.navigate(['/help_details', helpID]);
+  }
   ngOnDestroy(){
     if (this.watcher) {
       this.watcher.unsubscribe();

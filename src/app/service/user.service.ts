@@ -14,6 +14,10 @@ export class UserService {
     return this.http.get(`${this.url}/user/getUserByUid/${id}`);
   }
 
+  getTopUsers() : Observable<any> {
+      return this.http.get(`${this.url}/user/getTopUsers`);
+  }
+
   getUserByEmail(id): Observable<any> {
     return this.http.get(`${this.url}/user/getUserByEmail/${id}`);
   }

@@ -1,6 +1,5 @@
 import { WelcomeComponent } from './home/welcome/welcome.component';
 import { NgModule } from '@angular/core';
-import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 
@@ -11,11 +10,11 @@ import { AuthGuard } from './auth/auth.guard';
 import {SignupComponent} from "./signup/signup.component";
 
 import { HelpDetailsComponent } from './help-details/help-details.component';
-import {TutorRegisterComponent} from "./tutor-register/tutor-register.component";
 import { TimelineComponent } from './home/timeline/timeline.component';
 import { MockSystemComponent } from './mock-system/mock-system.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { ErrorComponent } from './error/error.component';
+import { RankUsersComponent } from './rank-users/rank-users.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/home/0', pathMatch: 'full' },
@@ -30,6 +29,7 @@ const childRoutes: Routes = [
         { path: 'welcome/:authorID', component: WelcomeComponent },
         { path: 'admin/reset', component: MockSystemComponent },
         { path: 'user_details/:id', component: UserDetailsComponent},
+        { path: 'rank_users', component: RankUsersComponent },
         { path: 'not_found', component: ErrorComponent}
     ] },
     { path: '**', redirectTo: '/home/0'}
